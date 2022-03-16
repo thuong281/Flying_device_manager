@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/deviceFragment">
+
+    <fragment
+        android:id="@+id/deviceFragment"
+        android:name="com.example.flyingdevicemanager.app_ui.device.DeviceFragment"
+        android:label="fragment_device"
+        tools:layout="@layout/fragment_device" />
+    <fragment
+        android:id="@+id/userKycFragment"
+        android:name="com.example.flyingdevicemanager.app_ui.user_kyc.UserKycFragment"
+        android:label="fragment_user_kyc"
+        tools:layout="@layout/fragment_user_kyc" />
+</navigation>

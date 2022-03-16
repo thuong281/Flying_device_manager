@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:enabled="true"
+        android:id="@+id/deviceFragment"
+        android:icon="@drawable/ic_baseline_airplanemode_active_24"
+        android:title="Device" />
+    <item
+        android:enabled="true"
+        android:id="@+id/userKycFragment"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="User Info" />
+</menu>
