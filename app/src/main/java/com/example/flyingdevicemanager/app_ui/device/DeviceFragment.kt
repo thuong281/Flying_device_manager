@@ -10,14 +10,16 @@ import com.example.flyingdevicemanager.R
 import com.example.flyingdevicemanager.app_ui.device.add_device.AddDeviceFragment
 import com.example.flyingdevicemanager.databinding.FragmentDeviceBinding
 import com.example.flyingdevicemanager.models.Device
+import com.example.flyingdevicemanager.util.*
 import kotlinx.coroutines.flow.collectLatest
+import retrofit2.Response
 
 class DeviceFragment : Fragment(), DeviceAdapter.ClickListener {
     
     lateinit var binding: FragmentDeviceBinding
     private val viewModel: DeviceViewModel by activityViewModels()
     
-    val adapter: DeviceAdapter by lazy { DeviceAdapter(this) }
+    private val adapter: DeviceAdapter by lazy { DeviceAdapter(this) }
     
     lateinit var sharedPreferences: SharedPreferences
     
@@ -51,12 +53,8 @@ class DeviceFragment : Fragment(), DeviceAdapter.ClickListener {
     }
     
     private fun observeData() {
-        viewModel.loading.observe(viewLifecycleOwner) {
-            if (it) {
-                binding.loading.visibility = View.VISIBLE
-            } else {
-                binding.loading.visibility = View.GONE
-            }
+        viewModel.loadingList.observe(viewLifecycleOwner) {
+            binding.freshLayout.isRefreshing = it
         }
         
         lifecycleScope.launchWhenCreated {
@@ -66,20 +64,64 @@ class DeviceFragment : Fragment(), DeviceAdapter.ClickListener {
                         adapter.items = it.body()?.data ?: ArrayList()
                     }
                     500 -> {
-                        Toast.makeText(context, "Server error", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            context,
+                            ErrorUtils.parseMessage(it as Response<Any>).errorMessage,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
+            }
+        }
+        
+        lifecycleScope.launchWhenCreated {
+            viewModel.userKycResponse.collectLatest {
+                when (it.code()) {
+                    200 -> {
+                        val fragment = AddDeviceFragment()
+                        fragment.listener = {
+                            loadData()
+                        }
+                        showDialog(fragment)
+                    }
+                    404, 202, 500 -> {
+                        errorMessage(it as Response<BaseResponse<Any>>)
+                    }
+                }
+            }
+        }
+        
+        lifecycleScope.launchWhenCreated {
+            viewModel.deleteDeviceResponse.collectLatest {
+                when (it.code()) {
+                    200 -> {
+                        loadData()
+                    }
+                    404, 500 -> {
+                        errorMessage(it)
+                    }
+                }
+            }
+        }
+        
+        viewModel.loading.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.loading.visibility = View.VISIBLE
+            } else {
+                binding.loading.visibility = View.GONE
             }
         }
     }
     
     private fun handleAction() {
         binding.btnAdd.setOnClickListener {
-            showDialog(AddDeviceFragment())
+            viewModel.getUserKyc(getToken().toString())
         }
-        binding.btnReload.setOnClickListener {
+        
+        binding.freshLayout.setOnRefreshListener {
             loadData()
         }
+        
     }
     
     private fun showDialog(fragment: DialogFragment) {
@@ -94,6 +136,18 @@ class DeviceFragment : Fragment(), DeviceAdapter.ClickListener {
     
     override fun showOnMap(device: Device) {
         Toast.makeText(context, "suc cac", Toast.LENGTH_SHORT).show()
+    }
+    
+    override fun deleteDevice(device: Device) {
+        viewModel.deleteDevice(getToken().toString(), device.deviceId.toString())
+    }
+    
+    private fun errorMessage(response: Response<BaseResponse<Any>>) {
+        Toast.makeText(
+            context,
+            ErrorUtils.parseMessage(response as Response<Any>).errorMessage,
+            Toast.LENGTH_SHORT
+        ).show()
     }
     
 }

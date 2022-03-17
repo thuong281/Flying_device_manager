@@ -1,68 +1,47 @@
-package com.example.flyingdevicemanager.app_ui.device.add_device
+package com.example.flyingdevicemanager.app_ui.other_user.search_user
 
 import android.app.Dialog
 import android.content.*
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.*
-import androidx.lifecycle.lifecycleScope
 import com.example.flyingdevicemanager.R
-import com.example.flyingdevicemanager.app_ui.device.DeviceViewModel
-import com.example.flyingdevicemanager.databinding.*
+import com.example.flyingdevicemanager.app_ui.other_user.UserFollowViewModel
+import com.example.flyingdevicemanager.databinding.FragmentSearchUserBinding
 import com.example.flyingdevicemanager.util.*
-import kotlinx.coroutines.flow.collectLatest
 import retrofit2.Response
 
-
-class AddDeviceFragment : DialogFragment() {
+class SearchUserFragment : DialogFragment() {
     
-    lateinit var binding: FragmentAddDeviceBinding
-    private val viewModel: DeviceViewModel by activityViewModels()
-    
-    var listener: (()->Unit)? = null
+    lateinit var binding: FragmentSearchUserBinding
+    private val viewModel: UserFollowViewModel by activityViewModels()
     
     lateinit var sharedPreferences: SharedPreferences
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NO_TITLE, R.style.ThemeOverlay_AppCompat_Dialog_Alert)
+        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.ThemeOverlay_AppCompat_Dialog_Alert)
     }
     
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        // Inflate the layout for this fragment
         sharedPreferences = activity!!.getSharedPreferences(
             "SHARED_PREF",
             Context.MODE_PRIVATE
         )
         // Inflate the layout for this fragment
-        binding = FragmentAddDeviceBinding.inflate(inflater, container, false)
+        binding = FragmentSearchUserBinding.inflate(inflater, container, false)
         return binding.root
     }
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         handleAction()
-        observeData()
-    }
-    
-    private fun observeData() {
-        lifecycleScope.launchWhenCreated {
-            viewModel.addDeviceResponse.collectLatest {
-                when (it.code()) {
-                    201 -> {
-                        Toast.makeText(context, "Add device success", Toast.LENGTH_SHORT).show()
-                        listener?.invoke()
-                        dismiss()
-                    }
-                    401, 500 -> {
-                        errorMessage(it)
-                    }
-                }
-            }
-        }
     }
     
     private fun handleAction() {
@@ -70,17 +49,26 @@ class AddDeviceFragment : DialogFragment() {
             dismiss()
         }
         
-        binding.add.setOnClickListener {
-            viewModel.addDevice(getToken().toString(), binding.deviceNameText.text.toString())
-        }
+        binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                binding.search.clearFocus()
+                Toast.makeText(context, "cac", Toast.LENGTH_SHORT).show()
+                return false
+            }
+            
+            override fun onQueryTextChange(p0: String?): Boolean {
+                return false
+            }
+        })
     }
+    
     
     override fun onStart() {
         super.onStart()
         val dialog: Dialog? = dialog
         if (dialog != null) {
-            val width = (resources.displayMetrics.widthPixels * 0.90).toInt()
-            val height = (resources.displayMetrics.heightPixels * 0.70).toInt()
+            val width = (resources.displayMetrics.widthPixels * 1).toInt()
+            val height = (resources.displayMetrics.heightPixels * 1).toInt()
             dialog.window!!.setLayout(width, height)
         }
     }
@@ -96,4 +84,5 @@ class AddDeviceFragment : DialogFragment() {
             Toast.LENGTH_SHORT
         ).show()
     }
+    
 }

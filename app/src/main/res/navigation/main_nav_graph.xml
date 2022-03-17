@@ -15,4 +15,9 @@
         android:name="com.example.flyingdevicemanager.app_ui.user_kyc.UserKycFragment"
         android:label="fragment_user_kyc"
         tools:layout="@layout/fragment_user_kyc" />
+    <fragment
+        android:id="@+id/userFollowFragment"
+        android:name="com.example.flyingdevicemanager.app_ui.other_user.UserFollowFragment"
+        android:label="fragment_user_follow"
+        tools:layout="@layout/fragment_user_follow" />
 </navigation>

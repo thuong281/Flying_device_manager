@@ -32,4 +32,12 @@ class Repository {
         return RetrofitInstance.api.getUserDevices(token)
     }
     
+    suspend fun addDevice(token: String, deviceName: String): Response<BaseResponse<Any>> {
+        return RetrofitInstance.api.addDevice(token, deviceName)
+    }
+    
+    suspend fun deleteDevice(token: String, deviceID: String): Response<BaseResponse<Any>> {
+        return RetrofitInstance.api.deleteDevice(token, deviceID)
+    }
+    
 }

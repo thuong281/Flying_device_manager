@@ -7,6 +7,11 @@
         android:title="Device" />
     <item
         android:enabled="true"
+        android:id="@+id/userFollowFragment"
+        android:icon="@drawable/ic_baseline_connect_without_contact_24"
+        android:title="Following" />
+    <item
+        android:enabled="true"
         android:id="@+id/userKycFragment"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="User Info" />

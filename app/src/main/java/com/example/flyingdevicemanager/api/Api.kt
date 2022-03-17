@@ -46,4 +46,25 @@ interface Api {
         @Header("auth-token") token: String,
     ): Response<BaseResponse<List<Device>>>
     
+    // add device
+    @PUT("api/device/insert-device")
+    @FormUrlEncoded
+    suspend fun addDevice(
+        @Header("auth-token") token: String,
+        @Field("device_name") deviceName: String
+    ): Response<BaseResponse<Any>>
+    
+    // delete device
+    @DELETE("api/device/delete-device/{device_id}")
+    suspend fun deleteDevice(
+        @Header("auth-token") token: String,
+        @Path("device_id") deviceId: String
+    ): Response<BaseResponse<Any>>
+    
+    // search user
+    @GET("api/user/find-user")
+    suspend fun searchUser(
+        @Query("word") word: String
+    ): Response<BaseResponse<UserFollow>>
+    
 }

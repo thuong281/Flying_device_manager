@@ -67,6 +67,10 @@ dependencies {
     // loading spin view
     implementation 'com.kaopiz:kprogresshud:1.2.0'
 
+    // load image to imageview
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    // swipe layout recyclerview
+    implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
 
 }
