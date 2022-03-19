@@ -40,4 +40,12 @@ class Repository {
         return RetrofitInstance.api.deleteDevice(token, deviceID)
     }
     
+    suspend fun searchUser(token: String, word: String): Response<BaseResponse<List<UserFollow>>> {
+        return RetrofitInstance.api.searchUser(token, word)
+    }
+    
+    suspend fun requestFollow(token: String, userId: String): Response<BaseResponse<Any>> {
+        return RetrofitInstance.api.requestFollow(token, userId)
+    }
+    
 }

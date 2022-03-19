@@ -64,7 +64,16 @@ interface Api {
     // search user
     @GET("api/user/find-user")
     suspend fun searchUser(
+        @Header("auth-token") token: String,
         @Query("word") word: String
-    ): Response<BaseResponse<UserFollow>>
+    ): Response<BaseResponse<List<UserFollow>>>
+    
+    // send follow request
+    @PUT("api/user/request-follow")
+    @FormUrlEncoded
+    suspend fun requestFollow(
+        @Header("auth-token") token: String,
+        @Field("user_id") userId: String
+    ): Response<BaseResponse<Any>>
     
 }

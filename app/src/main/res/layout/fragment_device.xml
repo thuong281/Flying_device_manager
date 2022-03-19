@@ -82,6 +82,7 @@
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <ProgressBar
+            android:indeterminateTint="@color/colorPrimary"
             android:visibility="gone"
             android:id="@+id/loading"
             android:layout_width="40dp"

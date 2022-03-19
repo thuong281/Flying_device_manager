@@ -7,22 +7,29 @@ import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.*
+import androidx.lifecycle.lifecycleScope
 import com.example.flyingdevicemanager.R
 import com.example.flyingdevicemanager.app_ui.other_user.UserFollowViewModel
 import com.example.flyingdevicemanager.databinding.FragmentSearchUserBinding
+import com.example.flyingdevicemanager.models.UserFollow
 import com.example.flyingdevicemanager.util.*
+import kotlinx.coroutines.flow.collectLatest
 import retrofit2.Response
 
-class SearchUserFragment : DialogFragment() {
+class SearchUserFragment : DialogFragment(), SearchUserAdapter.ClickListener {
     
     lateinit var binding: FragmentSearchUserBinding
     private val viewModel: UserFollowViewModel by activityViewModels()
     
-    lateinit var sharedPreferences: SharedPreferences
+    private val adapter: SearchUserAdapter by lazy { SearchUserAdapter(this) }
+    
+    private lateinit var sharedPreferences: SharedPreferences
+    
+    private var currentSearchPhrase = ""
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.ThemeOverlay_AppCompat_Dialog_Alert)
+        setStyle(STYLE_NO_TITLE, R.style.ThemeOverlay_AppCompat_Dialog_Alert)
     }
     
     override fun onCreateView(
@@ -42,6 +49,50 @@ class SearchUserFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         handleAction()
+        observeData()
+        initRv()
+    }
+    
+    private fun initRv() {
+        binding.rv.adapter = adapter
+    }
+    
+    private fun observeData() {
+        viewModel.searchUserLoading.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.loading.visibility = View.VISIBLE
+            } else {
+                binding.loading.visibility = View.GONE
+            }
+        }
+        
+        lifecycleScope.launchWhenCreated {
+            viewModel.searchUserResponse.collectLatest {
+                when (it.code()) {
+                    200 -> {
+                        adapter.items = it.body()?.data ?: ArrayList()
+                    }
+                    else -> {
+                        errorMessage(it as Response<BaseResponse<Any>>)
+                    }
+                }
+            }
+        }
+        
+        lifecycleScope.launchWhenCreated {
+            viewModel.requestFollowResponse.collectLatest {
+                when (it.code()) {
+                    200 -> {
+                        Toast.makeText(context, "Send request successfully", Toast.LENGTH_SHORT)
+                            .show()
+                        viewModel.searchUser(getToken().toString(), currentSearchPhrase)
+                    }
+                    else -> {
+                        errorMessage(it)
+                    }
+                }
+            }
+        }
     }
     
     private fun handleAction() {
@@ -52,7 +103,12 @@ class SearchUserFragment : DialogFragment() {
         binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 binding.search.clearFocus()
-                Toast.makeText(context, "cac", Toast.LENGTH_SHORT).show()
+                if (p0!!.length < 2) {
+                    Toast.makeText(context, "Enter more than 1 characters", Toast.LENGTH_SHORT)
+                        .show()
+                }
+                currentSearchPhrase = p0.toString()
+                viewModel.searchUser(getToken().toString(), p0.toString())
                 return false
             }
             
@@ -83,6 +139,10 @@ class SearchUserFragment : DialogFragment() {
             ErrorUtils.parseMessage(response as Response<Any>).errorMessage,
             Toast.LENGTH_SHORT
         ).show()
+    }
+    
+    override fun sendRequest(data: UserFollow) {
+        viewModel.requestFollow(getToken().toString(), data.userId.toString())
     }
     
 }

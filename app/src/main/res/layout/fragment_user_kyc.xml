@@ -215,6 +215,7 @@
 
 
     <ProgressBar
+        android:indeterminateTint="@color/colorPrimary"
         android:id="@+id/loading"
         android:indeterminate="true"
         android:layout_width="40dp"
