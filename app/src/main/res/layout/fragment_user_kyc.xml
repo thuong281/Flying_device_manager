@@ -5,16 +5,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app_ui.user_kyc.UserKycFragment">
+    tools:context=".app_ui.user_profile.user_kyc.UserKycFragment">
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/header"
@@ -29,16 +29,27 @@
                 android:gravity="center_vertical"
                 app:layout_scrollFlags="scroll|enterAlways|snap">
 
+                <ImageView
+                    android:id="@+id/btn_back"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="7dp"
+                    android:background="@color/colorPrimary"
+                    android:padding="7dp"
+                    android:src="@drawable/ic_baseline_arrow_back_24"
+                    app:tint="@color/white" />
 
                 <TextView
                     android:id="@+id/txt_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
                     android:maxLines="2"
                     android:text="User information"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:layout_centerInParent="true" />
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:id="@+id/btn_refresh"
@@ -57,12 +68,12 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <LinearLayout
-            android:visibility="gone"
             android:id="@+id/upload_screen"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            tools:context=".app_ui.user_kyc.UserKycFragment">
+            android:visibility="gone"
+            tools:context=".app_ui.user_profile.user_kyc.UserKycFragment">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/national_id"
@@ -110,18 +121,18 @@
         </LinearLayout>
 
         <LinearLayout
-            android:visibility="gone"
             android:id="@+id/show_screen"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            tools:context=".app_ui.user_kyc.UserKycFragment">
+            android:visibility="gone"
+            tools:context=".app_ui.user_profile.user_kyc.UserKycFragment">
 
             <RelativeLayout
-                android:layout_marginBottom="4dp"
                 android:id="@+id/status_verified"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -129,21 +140,21 @@
                     android:layout_height="wrap_content"
                     android:text="User verified"
                     android:textColor="@color/black"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" />
 
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/ic_baseline_verified_24"
-                    android:layout_alignParentEnd="true"/>
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_baseline_verified_24" />
 
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_marginBottom="4dp"
                 android:id="@+id/status_pending"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -151,13 +162,13 @@
                     android:layout_height="wrap_content"
                     android:text="User pending verify"
                     android:textColor="@color/black"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" />
 
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/ic_baseline_pending_actions_24"
-                    android:layout_alignParentEnd="true"/>
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_baseline_pending_actions_24" />
 
             </RelativeLayout>
 
@@ -166,47 +177,46 @@
                 android:layout_height="wrap_content"
                 android:text="id:"
                 android:textColor="@color/black"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
 
             <TextView
-                android:layout_marginTop="4dp"
                 android:id="@+id/user_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:text="12323424"
                 android:textColor="@color/black"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
 
             <TextView
-                android:layout_marginTop="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:text="id front image:"
                 android:textColor="@color/black"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
 
             <ImageView
-                android:layout_marginTop="4dp"
                 android:id="@+id/image_front"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
+                android:layout_marginTop="4dp"
                 android:src="@drawable/ic_baseline_person_24" />
 
             <TextView
-                android:layout_marginTop="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:text="id back image:"
                 android:textColor="@color/black"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
 
             <ImageView
-                android:layout_marginTop="4dp"
                 android:id="@+id/image_back"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
+                android:layout_marginTop="4dp"
                 android:src="@drawable/ic_baseline_person_24" />
-
 
 
         </LinearLayout>
@@ -215,11 +225,11 @@
 
 
     <ProgressBar
-        android:indeterminateTint="@color/colorPrimary"
         android:id="@+id/loading"
-        android:indeterminate="true"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

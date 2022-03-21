@@ -76,4 +76,46 @@ interface Api {
         @Field("user_id") userId: String
     ): Response<BaseResponse<Any>>
     
+    // get list user request to follow
+    @GET("api/user/pending-follow-request")
+    suspend fun getListRequestFollow(
+        @Header("auth-token") token: String
+    ): Response<BaseResponse<List<User>>>
+    
+    // get list follow of user
+    @GET("api/user/follow")
+    suspend fun getListFollow(
+        @Header("auth-token") token: String
+    ): Response<BaseResponse<List<User>>>
+    
+    // approve/reject follow request
+    @PUT("api/user/confirm-follow")
+    @FormUrlEncoded
+    suspend fun responseRequestFollow(
+        @Header("auth-token") token: String,
+        @Field("approve") approve: Int,
+        @Field("user_request") userRequestId: String
+    ): Response<BaseResponse<Any>>
+    
+    // get device location
+    @GET("api/device/get-location")
+    suspend fun getDeviceLocation(
+        @Header("auth-token") token: String,
+        @Query("device_id") deviceId: String
+    ): Response<BaseResponse<Location>>
+    
+    // get current user
+    @GET("api/user")
+    suspend fun getCurrentUser(
+        @Header("auth-token") token: String,
+    ): Response<BaseResponse<User>>
+    
+    // change user avatar
+    @PUT("api/user/avatar")
+    @Multipart
+    suspend fun updateAvatar(
+        @Header("auth-token") token: String,
+        @Part image: MultipartBody.Part
+    ): Response<BaseResponse<Any>>
+    
 }

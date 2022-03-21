@@ -6,6 +6,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.*
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.*
 import com.example.flyingdevicemanager.R
 import com.example.flyingdevicemanager.app_ui.device.add_device.AddDeviceFragment
 import com.example.flyingdevicemanager.databinding.FragmentDeviceBinding
@@ -23,6 +24,8 @@ class DeviceFragment : Fragment(), DeviceAdapter.ClickListener {
     
     lateinit var sharedPreferences: SharedPreferences
     
+    lateinit var navController: NavController
+    
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,6 +41,7 @@ class DeviceFragment : Fragment(), DeviceAdapter.ClickListener {
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
         loadData()
         handleAction()
         observeData()
@@ -61,6 +65,11 @@ class DeviceFragment : Fragment(), DeviceAdapter.ClickListener {
             viewModel.deviceList.collectLatest {
                 when (it.code()) {
                     200 -> {
+                        if (it.body()?.data?.size == 0) {
+                            binding.noData.visibility = View.VISIBLE
+                        } else {
+                            binding.noData.visibility = View.GONE
+                        }
                         adapter.items = it.body()?.data ?: ArrayList()
                     }
                     500 -> {
@@ -84,7 +93,10 @@ class DeviceFragment : Fragment(), DeviceAdapter.ClickListener {
                         }
                         showDialog(fragment)
                     }
-                    404, 202, 500 -> {
+                    202 -> {
+                        Toast.makeText(context, it.body()?.msg, Toast.LENGTH_SHORT).show()
+                    }
+                    404, 500 -> {
                         errorMessage(it as Response<BaseResponse<Any>>)
                     }
                 }
@@ -135,7 +147,10 @@ class DeviceFragment : Fragment(), DeviceAdapter.ClickListener {
     }
     
     override fun showOnMap(device: Device) {
-        Toast.makeText(context, "suc cac", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(context, "suc cac", Toast.LENGTH_SHORT).show()
+        val action =
+            DeviceFragmentDirections.actionDeviceFragmentToMapsActivity2(device.deviceId.toString())
+        navController.navigate(action)
     }
     
     override fun deleteDevice(device: Device) {

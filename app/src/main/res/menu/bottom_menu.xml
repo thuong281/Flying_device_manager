@@ -12,7 +12,7 @@
         android:title="Following" />
     <item
         android:enabled="true"
-        android:id="@+id/userKycFragment"
+        android:id="@+id/userFragment"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="User Info" />
 </menu>

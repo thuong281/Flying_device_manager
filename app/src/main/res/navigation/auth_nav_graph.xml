@@ -39,7 +39,7 @@
         tools:layout="@layout/activity_main" />
     <activity
         android:id="@+id/mapsActivity"
-        android:name="com.example.flyingdevicemanager.app_ui.MapsActivity"
+        android:name="com.example.flyingdevicemanager.app_ui.map.MapsActivity"
         android:label="activity_maps"
         tools:layout="@layout/activity_maps" />
 </navigation>

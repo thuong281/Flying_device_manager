@@ -6,6 +6,7 @@ import android.view.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flyingdevicemanager.databinding.UserItemBinding
 import com.example.flyingdevicemanager.models.UserFollow
+import com.squareup.picasso.Picasso
 
 class SearchUserAdapter(private val listener: ClickListener) : RecyclerView.Adapter<SearchUserAdapter.MyViewHolder>() {
     
@@ -37,6 +38,9 @@ class SearchUserAdapter(private val listener: ClickListener) : RecyclerView.Adap
                     binding.status.text = "Followed"
                     binding.status.setBackgroundColor(Color.parseColor("#8F8D8D"))
                 }
+            }
+            if (userFollow.avatar != null && userFollow.avatar != "") {
+                Picasso.get().load(userFollow.avatar).fit().centerCrop().into(binding.avatar)
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.example.flyingdevicemanager.app_ui.user_kyc
+package com.example.flyingdevicemanager.app_ui.user_profile.user_kyc
 
 import android.net.Uri
 import androidx.lifecycle.*

@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -72,5 +73,14 @@ dependencies {
 
     // swipe layout recyclerview
     implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
+
+    // socket io
+    implementation ('io.socket:socket.io-client:2.0.1') {
+        // excluding org.json which is provided by Android
+        exclude group: 'org.json', module: 'json'
+    }
+
+    // google location
+    implementation "com.google.android.gms:play-services-location:19.0.1"
 
 }

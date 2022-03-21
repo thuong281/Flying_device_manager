@@ -27,5 +27,7 @@ data class User(
     @SerializedName("userFollowingPending")
     val userFollowingPending: List<Any?>? = listOf(),
     @SerializedName("__v")
-    val v: Int? = 0
+    val v: Int? = 0,
+    @SerializedName("avatar")
+    val avatar: String? = ""
 )

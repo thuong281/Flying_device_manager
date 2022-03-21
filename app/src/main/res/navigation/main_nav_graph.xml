@@ -9,10 +9,14 @@
         android:id="@+id/deviceFragment"
         android:name="com.example.flyingdevicemanager.app_ui.device.DeviceFragment"
         android:label="fragment_device"
-        tools:layout="@layout/fragment_device" />
+        tools:layout="@layout/fragment_device" >
+        <action
+            android:id="@+id/action_deviceFragment_to_mapsActivity2"
+            app:destination="@id/mapsActivity2" />
+    </fragment>
     <fragment
         android:id="@+id/userKycFragment"
-        android:name="com.example.flyingdevicemanager.app_ui.user_kyc.UserKycFragment"
+        android:name="com.example.flyingdevicemanager.app_ui.user_profile.user_kyc.UserKycFragment"
         android:label="fragment_user_kyc"
         tools:layout="@layout/fragment_user_kyc" />
     <fragment
@@ -20,4 +24,18 @@
         android:name="com.example.flyingdevicemanager.app_ui.other_user.UserFollowFragment"
         android:label="fragment_user_follow"
         tools:layout="@layout/fragment_user_follow" />
+    <activity
+        android:id="@+id/mapsActivity2"
+        android:name="com.example.flyingdevicemanager.app_ui.map.MapsActivity"
+        android:label="activity_maps"
+        tools:layout="@layout/activity_maps" >
+        <argument
+            android:name="deviceId"
+            app:argType="string" />
+    </activity>
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.example.flyingdevicemanager.app_ui.user_profile.UserFragment"
+        android:label="fragment_user"
+        tools:layout="@layout/fragment_user" />
 </navigation>

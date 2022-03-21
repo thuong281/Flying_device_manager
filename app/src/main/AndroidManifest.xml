@@ -36,7 +36,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".app_ui.MapsActivity"
+            android:name=".app_ui.map.MapsActivity"
             android:exported="false"
             android:label="@string/title_activity_maps" />
         <activity

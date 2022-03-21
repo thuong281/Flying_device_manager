@@ -3,12 +3,8 @@ package com.example.flyingdevicemanager.repository
 import com.example.flyingdevicemanager.api.RetrofitInstance
 import com.example.flyingdevicemanager.models.*
 import com.example.flyingdevicemanager.util.BaseResponse
-import com.google.gson.JsonObject
 import okhttp3.*
-import org.json.JSONObject
 import retrofit2.Response
-import java.util.*
-import kotlin.collections.ArrayList
 
 class Repository {
     
@@ -20,7 +16,9 @@ class Repository {
         return RetrofitInstance.api.signup(email, userName, password)
     }
     
-    suspend fun submitUserKyc(token: String, image: List<MultipartBody.Part>, data: RequestBody): Response<ApiMessage> {
+    suspend fun submitUserKyc(
+        token: String, image: List<MultipartBody.Part>, data: RequestBody
+    ): Response<ApiMessage> {
         return RetrofitInstance.api.requestKyc(token, image as ArrayList<MultipartBody.Part>, data)
     }
     
@@ -46,6 +44,36 @@ class Repository {
     
     suspend fun requestFollow(token: String, userId: String): Response<BaseResponse<Any>> {
         return RetrofitInstance.api.requestFollow(token, userId)
+    }
+    
+    suspend fun responseRequestFollow(
+        token: String, approve: Int, userRequestId: String
+    ): Response<BaseResponse<Any>> {
+        return RetrofitInstance.api.responseRequestFollow(token, approve, userRequestId)
+    }
+    
+    suspend fun getListRequestFollow(token: String): Response<BaseResponse<List<User>>> {
+        return RetrofitInstance.api.getListRequestFollow(token)
+    }
+    
+    suspend fun getListFollow(token: String): Response<BaseResponse<List<User>>> {
+        return RetrofitInstance.api.getListFollow(token)
+    }
+    
+    suspend fun getDeviceLocation(
+        token: String, deviceId: String
+    ): Response<BaseResponse<Location>> {
+        return RetrofitInstance.api.getDeviceLocation(token, deviceId)
+    }
+    
+    suspend fun getCurrentUser(token: String): Response<BaseResponse<User>> {
+        return RetrofitInstance.api.getCurrentUser(token)
+    }
+    
+    suspend fun updateAvatar(
+        token: String, image: MultipartBody.Part
+    ): Response<BaseResponse<Any>> {
+        return RetrofitInstance.api.updateAvatar(token, image)
     }
     
 }

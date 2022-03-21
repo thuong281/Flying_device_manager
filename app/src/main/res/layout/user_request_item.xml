@@ -1,9 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<com.chauthai.swipereveallayout.SwipeRevealLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe_layout"
+    app:dragEdge="right"
+    app:mode="same_level">
+
+    <LinearLayout
+        android:id="@+id/response_container"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/approve"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:text="Approve"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:background="@color/colorPrimary"/>
+
+        <TextView
+            android:id="@+id/reject"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:text="Reject"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:background="@color/red"/>
+
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/item"
@@ -12,8 +44,7 @@
         android:layout_marginTop="8dp">
 
         <androidx.cardview.widget.CardView
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="4dp"
             android:id="@+id/image_container"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -57,26 +88,14 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="4dp"
-            android:background="@color/primaryColor"
-            android:padding="4dp"
-            android:text="bu cac"
-            android:textColor="@color/white" />
-
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@id/info"
             android:layout_marginTop="8dp"
-            android:background="@drawable/round_backgroud" />
+            android:background="@color/grayLine" />
 
     </RelativeLayout>
 
-</LinearLayout>
+</com.chauthai.swipereveallayout.SwipeRevealLayout>
 

@@ -1,56 +1,95 @@
 package com.example.flyingdevicemanager.app_ui.other_user.following
 
+import android.content.*
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import com.example.flyingdevicemanager.R
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
+import android.view.*
+import android.widget.Toast
+import androidx.fragment.app.*
+import androidx.lifecycle.lifecycleScope
+import com.example.flyingdevicemanager.app_ui.other_user.UserFollowViewModel
+import com.example.flyingdevicemanager.databinding.FragmentUserFollowingBinding
+import com.example.flyingdevicemanager.util.*
+import kotlinx.coroutines.flow.collectLatest
+import retrofit2.Response
 
 class UserFollowingFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
     
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    lateinit var binding: FragmentUserFollowingBinding
+    private val viewModel: UserFollowViewModel by activityViewModels()
+    
+    private val adapter: UserFollowingAdapter by lazy { UserFollowingAdapter() }
+    
+    private lateinit var sharedPreferences: SharedPreferences
     
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        sharedPreferences = activity!!.getSharedPreferences(
+            "SHARED_PREF",
+            Context.MODE_PRIVATE
+        )
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_following, container, false)
+        binding = FragmentUserFollowingBinding.inflate(inflater, container, false)
+        return binding.root
     }
     
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment UserFollowingFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            UserFollowingFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initRv()
+        loadData()
+        handleAction()
+        observeData()
+    }
+    
+    private fun observeData() {
+        viewModel.listFollowingLoading.observe(viewLifecycleOwner) {
+            binding.freshLayout.isRefreshing = it
+        }
+        
+        lifecycleScope.launchWhenCreated {
+            viewModel.listFollowingResponse.collectLatest {
+                when (it.code()) {
+                    200 -> {
+                        if (it.body()?.data?.size == 0) {
+                            binding.noData.visibility = View.VISIBLE
+                        } else {
+                            binding.noData.visibility = View.GONE
+                        }
+                        adapter.items = it.body()?.data ?: ArrayList()
+                    }
+                    else -> {
+                        errorMessage(it as Response<BaseResponse<Any>>)
+                    }
                 }
             }
+        }
     }
+    
+    private fun handleAction() {
+        binding.freshLayout.setOnRefreshListener {
+            loadData()
+        }
+    }
+    
+    private fun loadData() {
+        viewModel.getListFollowing(getToken().toString())
+    }
+    
+    private fun initRv() {
+        binding.rv.adapter = adapter
+    }
+    
+    private fun getToken(): String? {
+        return sharedPreferences.getString("token", "")
+    }
+    
+    private fun errorMessage(response: Response<BaseResponse<Any>>) {
+        Toast.makeText(
+            context,
+            ErrorUtils.parseMessage(response as Response<Any>).errorMessage,
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+    
 }

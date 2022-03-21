@@ -1,6 +1,7 @@
-package com.example.flyingdevicemanager.app_ui.user_kyc
+package com.example.flyingdevicemanager.app_ui.user_profile.user_kyc
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.*
 import android.database.Cursor
 import android.net.Uri
@@ -11,24 +12,35 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.*
 import androidx.lifecycle.lifecycleScope
+import com.example.flyingdevicemanager.R
 import com.example.flyingdevicemanager.databinding.FragmentUserKycBinding
 import com.example.flyingdevicemanager.models.UserKyc
 import com.example.flyingdevicemanager.util.ErrorUtils
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import okhttp3.*
 import retrofit2.Response
 import java.io.File
 
 
-class UserKycFragment : Fragment() {
+class UserKycFragment : DialogFragment() {
     
     
     lateinit var binding: FragmentUserKycBinding
     private val viewModel: UserKycViewModel by activityViewModels()
     
     lateinit var sharedPreferences: SharedPreferences
+    
+    override fun onStart() {
+        super.onStart()
+        val dialog: Dialog? = dialog
+        if (dialog != null) {
+            val width = ViewGroup.LayoutParams.MATCH_PARENT
+            val height = ViewGroup.LayoutParams.MATCH_PARENT
+            dialog.window!!.setLayout(width, height)
+        }
+    }
+    
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,7 +50,8 @@ class UserKycFragment : Fragment() {
             Context.MODE_PRIVATE
         )
         // Inflate the layout for this fragment
-        binding = FragmentUserKycBinding.inflate(inflater, container, false)
+        binding = FragmentUserKycBinding.inflate(layoutInflater)
+        dialog?.setCanceledOnTouchOutside(false)
         return binding.root
     }
     
@@ -179,6 +192,9 @@ class UserKycFragment : Fragment() {
         }
         binding.btnRefresh.setOnClickListener {
             getUserKyc()
+        }
+        binding.btnBack.setOnClickListener {
+            dismiss()
         }
     }
     
