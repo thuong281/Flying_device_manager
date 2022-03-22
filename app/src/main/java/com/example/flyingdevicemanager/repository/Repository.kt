@@ -76,4 +76,20 @@ class Repository {
         return RetrofitInstance.api.updateAvatar(token, image)
     }
     
+    suspend fun getAllUserKyc(token: String): Response<BaseResponse<List<User>>> {
+        return RetrofitInstance.api.getAllUserKyc(token)
+    }
+    
+    suspend fun getOtherUserKyc(token: String, userId: String): Response<BaseResponse<UserKyc>> {
+        return RetrofitInstance.api.getOtherUserKyc(token, userId)
+    }
+    
+    suspend fun approveUserKyc(token: String, userId: String): Response<BaseResponse<Any>> {
+        return RetrofitInstance.api.approveUserKyc(token, userId)
+    }
+    
+    suspend fun rejectUserKyc(token: String, userId: String): Response<BaseResponse<Any>> {
+        return RetrofitInstance.api.rejectUserKyc(token, userId)
+    }
+    
 }

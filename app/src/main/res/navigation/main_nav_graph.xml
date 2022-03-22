@@ -15,11 +15,6 @@
             app:destination="@id/mapsActivity2" />
     </fragment>
     <fragment
-        android:id="@+id/userKycFragment"
-        android:name="com.example.flyingdevicemanager.app_ui.user_profile.user_kyc.UserKycFragment"
-        android:label="fragment_user_kyc"
-        tools:layout="@layout/fragment_user_kyc" />
-    <fragment
         android:id="@+id/userFollowFragment"
         android:name="com.example.flyingdevicemanager.app_ui.other_user.UserFollowFragment"
         android:label="fragment_user_follow"
@@ -37,5 +32,17 @@
         android:id="@+id/userFragment"
         android:name="com.example.flyingdevicemanager.app_ui.user_profile.UserFragment"
         android:label="fragment_user"
-        tools:layout="@layout/fragment_user" />
+        tools:layout="@layout/fragment_user" >
+        <action
+            android:id="@+id/action_userFragment_to_authActivity"
+            app:destination="@id/authActivity"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <activity
+        android:id="@+id/authActivity"
+        android:name="com.example.flyingdevicemanager.AuthActivity"
+        android:label="activity_auth"
+        tools:layout="@layout/activity_auth" />
 </navigation>

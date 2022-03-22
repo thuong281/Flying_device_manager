@@ -111,11 +111,38 @@ interface Api {
     ): Response<BaseResponse<User>>
     
     // change user avatar
-    @PUT("api/user/avatar")
+    @POST("api/user/avatar")
     @Multipart
     suspend fun updateAvatar(
         @Header("auth-token") token: String,
         @Part image: MultipartBody.Part
+    ): Response<BaseResponse<Any>>
+    
+    // get all user that kyc is not verified
+    @GET("api/user/users-kyc")
+    suspend fun getAllUserKyc(
+        @Header("auth-token") token: String
+    ): Response<BaseResponse<List<User>>>
+    
+    // get other user kyc
+    @GET("api/user/other-user-kyc")
+    suspend fun getOtherUserKyc(
+        @Header("auth-token") token: String,
+        @Query("user_id") userId: String
+    ): Response<BaseResponse<UserKyc>>
+    
+    // approve user kyc
+    @PUT("api/user/user-kyc/confirm/{user_id}")
+    suspend fun approveUserKyc(
+        @Header("auth-token") token: String,
+        @Path("user_id") userId: String
+    ): Response<BaseResponse<Any>>
+    
+    // reject user kyc
+    @DELETE("api/user/user-kyc/delete/{user_id}")
+    suspend fun rejectUserKyc(
+        @Header("auth-token") token: String,
+        @Path("user_id") userId: String
     ): Response<BaseResponse<Any>>
     
 }

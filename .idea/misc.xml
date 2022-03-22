@@ -16,6 +16,7 @@
         <entry key="app/src/main/res/drawable/round_backgroud.xml" value="0.26875" />
         <entry key="app/src/main/res/drawable/searchview_backgroud.xml" value="0.26875" />
         <entry key="app/src/main/res/drawable/user_item.xml" value="0.1703125" />
+        <entry key="app/src/main/res/layout/activity_auth.xml" value="0.1265625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/activity_maps.xml" value="0.12604166666666666" />
         <entry key="app/src/main/res/layout/bottom_dialog.xml" value="0.2526041666666667" />
@@ -23,6 +24,8 @@
         <entry key="app/src/main/res/layout/fragment_add_device.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_avatar.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/fragment_device.xml" value="0.2526041666666667" />
+        <entry key="app/src/main/res/layout/fragment_list_user.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_list_user_kyc.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/fragment_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_search_user.xml" value="0.18" />
@@ -31,6 +34,7 @@
         <entry key="app/src/main/res/layout/fragment_user_follow.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/fragment_user_following.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/fragment_user_kyc.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_user_kyc_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_user_request_follow.xml" value="0.14739583333333334" />
         <entry key="app/src/main/res/layout/user_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/user_request_item.xml" value="0.33" />

@@ -43,7 +43,7 @@
                 style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="pepeSucCac@gmail.com"
+                android:text="pepe@gmail.com"
                 android:textColor="@color/black" />
 
             <TextView
@@ -66,7 +66,7 @@
             android:layout_marginEnd="4dp"
             android:background="@color/primaryColor"
             android:padding="4dp"
-            android:text="bu cac"
+            android:text="xD"
             android:textColor="@color/white" />
 
         <View

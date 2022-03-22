@@ -1,13 +1,16 @@
 package com.example.flyingdevicemanager.app_ui.user_profile
 
+import android.annotation.SuppressLint
 import android.content.*
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.*
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.*
 import com.example.flyingdevicemanager.R
 import com.example.flyingdevicemanager.app_ui.user_profile.dialog.AvatarFragment
+import com.example.flyingdevicemanager.app_ui.user_profile.review_user_kyc.ListUserKycFragment
 import com.example.flyingdevicemanager.app_ui.user_profile.user_kyc.UserKycFragment
 import com.example.flyingdevicemanager.databinding.FragmentUserBinding
 import com.example.flyingdevicemanager.models.User
@@ -22,10 +25,14 @@ class UserFragment : Fragment() {
     lateinit var binding: FragmentUserBinding
     private val viewModel: UserViewModel by activityViewModels()
     
+    lateinit var navController: NavController
+    
     lateinit var sharedPreferences: SharedPreferences
+    lateinit var editor: SharedPreferences.Editor
     
     lateinit var user: User
     
+    @SuppressLint("CommitPrefEdits")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,6 +41,7 @@ class UserFragment : Fragment() {
             "SHARED_PREF",
             Context.MODE_PRIVATE
         )
+        editor = sharedPreferences.edit()
         // Inflate the layout for this fragment
         binding = FragmentUserBinding.inflate(inflater, container, false)
         return binding.root
@@ -41,6 +49,7 @@ class UserFragment : Fragment() {
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
         handleAction()
         loadData()
         observeData()
@@ -53,6 +62,12 @@ class UserFragment : Fragment() {
                     200 -> {
                         bindData(it.body()!!.data)
                         user = it.body()!!.data
+                        
+                        if (user.isAdmin == "1") {
+                            binding.userKycReview.visibility = View.VISIBLE
+                        } else {
+                            binding.userKycReview.visibility = View.GONE
+                        }
                     }
                     else -> {
                         errorMessage(it as Response<BaseResponse<Any>>)
@@ -86,8 +101,13 @@ class UserFragment : Fragment() {
             showDialog(UserKycFragment())
         }
         
-        binding.logout.setOnClickListener {
+        binding.userKycReview.setOnClickListener {
+            showDialog(ListUserKycFragment())
+        }
         
+        binding.logout.setOnClickListener {
+            navController.navigate(R.id.action_userFragment_to_authActivity)
+            removeToken()
         }
         
         binding.imageContainer.setOnClickListener {
@@ -119,6 +139,11 @@ class UserFragment : Fragment() {
         val fm: FragmentManager? = fragmentManager
         fragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_AppCompat_Light_NoActionBar)
         fragment.show(fm!!, "")
+    }
+    
+    private fun removeToken() {
+        editor.putString("token", "")
+        editor.commit()
     }
     
 }

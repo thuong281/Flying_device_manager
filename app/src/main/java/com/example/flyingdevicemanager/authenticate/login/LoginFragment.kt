@@ -5,6 +5,7 @@ import android.content.*
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.fragment.app.*
 import androidx.navigation.*
 import com.example.flyingdevicemanager.R
@@ -22,6 +23,15 @@ class LoginFragment : Fragment() {
     
     lateinit var sharedPreferences: SharedPreferences
     lateinit var editor: SharedPreferences.Editor
+    
+    
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+            return@addCallback
+        }
+        callback.isEnabled = true
+    }
     
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
