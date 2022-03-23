@@ -19,9 +19,6 @@
             app:launchSingleTop="true"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_loginFragment_to_mapsActivity"
-            app:destination="@id/mapsActivity" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
@@ -37,9 +34,4 @@
         android:name="com.example.flyingdevicemanager.app_ui.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
-    <activity
-        android:id="@+id/mapsActivity"
-        android:name="com.example.flyingdevicemanager.app_ui.map.MapsActivity"
-        android:label="activity_maps"
-        tools:layout="@layout/activity_maps" />
 </navigation>

@@ -20,8 +20,16 @@ class MainActivity : AppCompatActivity() {
         const val STORAGE_PERMISSION_CODE = 101
     }
     
+    private var doubleBackToExitPressedOnce = false
     override fun onBackPressed() {
-        return
+        if (doubleBackToExitPressedOnce) {
+            finishAffinity()
+        }
+        
+        this.doubleBackToExitPressedOnce = true
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
+        
+        Handler(Looper.getMainLooper()).postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
     }
     
     override fun onCreate(savedInstanceState: Bundle?) {
