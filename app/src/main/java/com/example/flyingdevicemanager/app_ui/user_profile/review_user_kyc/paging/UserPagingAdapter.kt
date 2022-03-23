@@ -1,21 +1,15 @@
-package com.example.flyingdevicemanager.app_ui.user_profile.review_user_kyc
+package com.example.flyingdevicemanager.app_ui.user_profile.review_user_kyc.paging
 
 import android.annotation.SuppressLint
 import android.view.*
-import androidx.recyclerview.widget.RecyclerView
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.*
 import com.example.flyingdevicemanager.R
 import com.example.flyingdevicemanager.databinding.UserItemBinding
 import com.example.flyingdevicemanager.models.User
 import com.squareup.picasso.Picasso
 
-class UserKycAdapter(private val listener: ClickListener) : RecyclerView.Adapter<UserKycAdapter.MyViewHolder>() {
-    
-    var items = listOf<User>()
-        @SuppressLint("NotifyDataSetChanged")
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+class UserPagingAdapter(private val listener: ClickListener) : PagingDataAdapter<User, UserPagingAdapter.MyViewHolder>(itemDiff) {
     
     class MyViewHolder(private val binding: UserItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -34,6 +28,26 @@ class UserKycAdapter(private val listener: ClickListener) : RecyclerView.Adapter
         }
     }
     
+    companion object {
+        val itemDiff = object : DiffUtil.ItemCallback<User>() {
+            override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
+                return oldItem.id == newItem.id
+            }
+            
+            override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
+                return oldItem == newItem
+            }
+            
+        }
+    }
+    
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        holder.bind(getItem(position)!!)
+        holder.item.setOnClickListener {
+            listener.showUserKycDetail(getItem(position)!!, position)
+        }
+    }
+    
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
             UserItemBinding.inflate(
@@ -44,16 +58,8 @@ class UserKycAdapter(private val listener: ClickListener) : RecyclerView.Adapter
         )
     }
     
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(items[position])
-        holder.item.setOnClickListener {
-            listener.showUserKycDetail(items[position])
-        }
-    }
-    
-    override fun getItemCount() = items.size
-    
     interface ClickListener {
-        fun showUserKycDetail(user: User)
+        fun showUserKycDetail(user: User, position: Int)
     }
+    
 }

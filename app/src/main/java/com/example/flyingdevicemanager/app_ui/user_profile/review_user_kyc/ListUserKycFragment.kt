@@ -7,20 +7,22 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.*
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import com.example.flyingdevicemanager.R
 import com.example.flyingdevicemanager.app_ui.user_profile.UserViewModel
+import com.example.flyingdevicemanager.app_ui.user_profile.review_user_kyc.paging.UserPagingAdapter
 import com.example.flyingdevicemanager.databinding.FragmentListUserKycBinding
 import com.example.flyingdevicemanager.models.User
 import com.example.flyingdevicemanager.util.*
 import kotlinx.coroutines.flow.collectLatest
 import retrofit2.Response
 
-class ListUserKycFragment : DialogFragment(), UserKycAdapter.ClickListener {
+class ListUserKycFragment : DialogFragment(), UserPagingAdapter.ClickListener {
     
     lateinit var binding: FragmentListUserKycBinding
     private val viewModel: UserViewModel by activityViewModels()
     
-    private val adapter: UserKycAdapter by lazy { UserKycAdapter(this) }
+    private val adapterUserPaging: UserPagingAdapter by lazy { UserPagingAdapter(this) }
     
     lateinit var sharedPreferences: SharedPreferences
     
@@ -56,8 +58,12 @@ class ListUserKycFragment : DialogFragment(), UserKycAdapter.ClickListener {
         observeData()
     }
     
+    private fun loadData() {
+        viewModel.getUserKycList(getToken().toString())
+    }
+    
     private fun initRv() {
-        binding.rv.adapter = adapter
+        binding.rv.adapter = adapterUserPaging
     }
     
     private fun observeData() {
@@ -69,27 +75,35 @@ class ListUserKycFragment : DialogFragment(), UserKycAdapter.ClickListener {
             }
         }
         
+        viewModel.pagingFlow.observe(viewLifecycleOwner) {
+            adapterUserPaging.submitData(viewLifecycleOwner.lifecycle, it)
+        }
+        
         lifecycleScope.launchWhenCreated {
-            viewModel.getAllUserKycResponse.collectLatest {
-                when (it.code()) {
-                    200 -> {
-                        adapter.items = it.body()?.data ?: ArrayList()
+            adapterUserPaging.loadStateFlow.collectLatest { loadStates ->
+                when (loadStates.refresh) {
+                    is LoadState.Loading -> binding.loading.visibility = View.VISIBLE
+                    is LoadState.Error -> {
+                        Toast.makeText(
+                            context,
+                            (loadStates.refresh as LoadState.Error).error.message.toString(),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
-                    else -> {
-                        errorMessage(it as Response<BaseResponse<Any>>)
-                    }
+                    else -> binding.loading.visibility = View.GONE
                 }
             }
         }
     }
-    
-    private fun loadData() {
-        viewModel.getAllUserKyc(getToken().toString())
-    }
+
+
+//    private fun loadData() {
+//        viewModel.getAllUserKyc(getToken().toString())
+//    }
     
     private fun handleAction() {
         binding.btnRefresh.setOnClickListener {
-            loadData()
+            adapterUserPaging.refresh()
         }
         binding.btnBack.setOnClickListener {
             dismiss()
@@ -114,10 +128,12 @@ class ListUserKycFragment : DialogFragment(), UserKycAdapter.ClickListener {
         fragment.show(fm!!, "")
     }
     
-    override fun showUserKycDetail(user: User) {
-        val fragment = UserKycDetailFragment(user)
+    override fun showUserKycDetail(user: User, position: Int) {
+        val fragment = UserKycDetailFragment(user, position)
         fragment.reviewFinishCallback = {
             loadData()
+//            adapterUserPaging.notifyItemRemoved(position)
+            adapterUserPaging.refresh()
         }
         showDialog(fragment)
     }

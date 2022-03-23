@@ -119,9 +119,10 @@ interface Api {
     ): Response<BaseResponse<Any>>
     
     // get all user that kyc is not verified
-    @GET("api/user/users-kyc")
+    @GET("api/user/users-kyc/{page}")
     suspend fun getAllUserKyc(
-        @Header("auth-token") token: String
+        @Header("auth-token") token: String,
+        @Path("page") page: Int
     ): Response<BaseResponse<List<User>>>
     
     // get other user kyc

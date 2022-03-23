@@ -83,4 +83,7 @@ dependencies {
     // google location
     implementation "com.google.android.gms:play-services-location:19.0.1"
 
+    // paging
+    implementation("androidx.paging:paging-runtime:3.1.1")
+
 }

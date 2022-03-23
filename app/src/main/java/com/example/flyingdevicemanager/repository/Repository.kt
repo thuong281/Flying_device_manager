@@ -1,6 +1,8 @@
 package com.example.flyingdevicemanager.repository
 
+import androidx.paging.*
 import com.example.flyingdevicemanager.api.RetrofitInstance
+import com.example.flyingdevicemanager.app_ui.user_profile.review_user_kyc.paging.UserPagingSource
 import com.example.flyingdevicemanager.models.*
 import com.example.flyingdevicemanager.util.BaseResponse
 import okhttp3.*
@@ -76,9 +78,9 @@ class Repository {
         return RetrofitInstance.api.updateAvatar(token, image)
     }
     
-    suspend fun getAllUserKyc(token: String): Response<BaseResponse<List<User>>> {
-        return RetrofitInstance.api.getAllUserKyc(token)
-    }
+//    suspend fun getAllUserKyc(token: String): Response<BaseResponse<List<User>>> {
+//        return RetrofitInstance.api.getAllUserKyc(token)
+//    }
     
     suspend fun getOtherUserKyc(token: String, userId: String): Response<BaseResponse<UserKyc>> {
         return RetrofitInstance.api.getOtherUserKyc(token, userId)
@@ -91,5 +93,14 @@ class Repository {
     suspend fun rejectUserKyc(token: String, userId: String): Response<BaseResponse<Any>> {
         return RetrofitInstance.api.rejectUserKyc(token, userId)
     }
+    
+    fun getAllUserKycPaging(token: String) = Pager(
+        config = PagingConfig(
+            pageSize = 2,
+            maxSize = 100,
+            enablePlaceholders = false
+        ),
+        pagingSourceFactory = { UserPagingSource(RetrofitInstance.api, token) }
+    ).liveData
     
 }

@@ -18,12 +18,12 @@ import com.squareup.picasso.Picasso
 import kotlinx.coroutines.flow.collectLatest
 import retrofit2.Response
 
-class UserKycDetailFragment(private val user: User) : DialogFragment() {
+class UserKycDetailFragment(private val user: User, private val position: Int) : DialogFragment() {
     
     lateinit var binding: FragmentUserKycDetailBinding
     private val viewModel: UserViewModel by activityViewModels()
     
-    var reviewFinishCallback: (() -> Unit)? = null
+    var reviewFinishCallback: ((position: Int) -> Unit)? = null
     
     lateinit var sharedPreferences: SharedPreferences
     
@@ -84,7 +84,7 @@ class UserKycDetailFragment(private val user: User) : DialogFragment() {
             viewModel.approveUserKycResponse.collectLatest {
                 when (it.code()) {
                     200 -> {
-                        reviewFinishCallback?.invoke()
+                        reviewFinishCallback?.invoke(position)
                         dismiss()
                         Toast.makeText(context, "Approve successfully",Toast.LENGTH_SHORT).show()
                     }
@@ -97,7 +97,7 @@ class UserKycDetailFragment(private val user: User) : DialogFragment() {
             viewModel.rejectUserKycResponse.collectLatest {
                 when (it.code()) {
                     200 -> {
-                        reviewFinishCallback?.invoke()
+                        reviewFinishCallback?.invoke(position)
                         dismiss()
                         Toast.makeText(context, "Reject successfully",Toast.LENGTH_SHORT).show()
                     }

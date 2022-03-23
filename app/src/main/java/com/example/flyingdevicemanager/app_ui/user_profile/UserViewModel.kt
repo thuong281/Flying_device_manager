@@ -2,11 +2,13 @@ package com.example.flyingdevicemanager.app_ui.user_profile
 
 import android.net.Uri
 import androidx.lifecycle.*
+import androidx.lifecycle.switchMap
+import androidx.paging.*
 import com.example.flyingdevicemanager.models.*
 import com.example.flyingdevicemanager.repository.Repository
 import com.example.flyingdevicemanager.util.BaseResponse
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 import okhttp3.MultipartBody
 import retrofit2.Response
 
@@ -55,14 +57,14 @@ class UserViewModel : ViewModel() {
         }
     }
     
-    fun getAllUserKyc(token: String) {
-        viewModelScope.launch {
-            listUserKycLoading.postValue(true)
-            val response = repository.getAllUserKyc(token)
-            getAllUserKycResponse.emit(response)
-            listUserKycLoading.postValue(false)
-        }
-    }
+//    fun getAllUserKyc(token: String) {
+//        viewModelScope.launch {
+//            listUserKycLoading.postValue(true)
+//            val response = repository.getAllUserKyc(token)
+//            getAllUserKycResponse.emit(response)
+//            listUserKycLoading.postValue(false)
+//        }
+//    }
     
     fun getUserKyc(token: String, userId: String) {
         viewModelScope.launch {
@@ -90,4 +92,13 @@ class UserViewModel : ViewModel() {
             userKycLoading.postValue(false)
         }
     }
+    
+    val token: MutableLiveData<String> = MutableLiveData()
+    
+    var pagingFlow: LiveData<PagingData<User>> = MutableLiveData()
+    
+    fun getUserKycList(token: String) {
+        pagingFlow = repository.getAllUserKycPaging(token).cachedIn(viewModelScope)
+    }
+    
 }
