@@ -13,6 +13,7 @@ import com.example.flyingdevicemanager.app_ui.other_user.UserFollowViewModel
 import com.example.flyingdevicemanager.databinding.FragmentSearchUserBinding
 import com.example.flyingdevicemanager.models.UserFollow
 import com.example.flyingdevicemanager.util.*
+import com.example.flyingdevicemanager.util.base.BaseResponse
 import kotlinx.coroutines.flow.collectLatest
 import retrofit2.Response
 

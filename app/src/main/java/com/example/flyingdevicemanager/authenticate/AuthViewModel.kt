@@ -1,15 +1,14 @@
 package com.example.flyingdevicemanager.authenticate
 
 import android.app.Application
-import android.content.SharedPreferences
 import android.widget.Toast
 import androidx.lifecycle.*
 import com.example.flyingdevicemanager.models.*
 import com.example.flyingdevicemanager.repository.Repository
-import com.example.flyingdevicemanager.util.BaseResponse
+import com.example.flyingdevicemanager.util.base.BaseResponse
 import kotlinx.coroutines.launch
 import retrofit2.Response
-import java.net.ConnectException
+import java.net.*
 
 class AuthViewModel(application: Application) : AndroidViewModel(application) {
     
@@ -27,6 +26,9 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
                 loginResponse.value = response
             } catch (e: ConnectException) {
                 Toast.makeText(getApplication(), "No internet connection", Toast.LENGTH_SHORT)
+                    .show()
+            } catch (e: SocketTimeoutException) {
+                Toast.makeText(getApplication(), "Cannot connect to server", Toast.LENGTH_SHORT)
                     .show()
             }
             

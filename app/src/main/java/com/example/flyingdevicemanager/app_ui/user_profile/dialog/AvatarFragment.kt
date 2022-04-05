@@ -17,6 +17,7 @@ import com.example.flyingdevicemanager.app_ui.user_profile.UserViewModel
 import com.example.flyingdevicemanager.databinding.FragmentAvatarBinding
 import com.example.flyingdevicemanager.models.User
 import com.example.flyingdevicemanager.util.*
+import com.example.flyingdevicemanager.util.base.BaseResponse
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.flow.collectLatest
 import okhttp3.*

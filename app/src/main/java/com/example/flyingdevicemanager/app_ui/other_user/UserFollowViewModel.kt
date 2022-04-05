@@ -3,7 +3,7 @@ package com.example.flyingdevicemanager.app_ui.other_user
 import androidx.lifecycle.*
 import com.example.flyingdevicemanager.models.*
 import com.example.flyingdevicemanager.repository.Repository
-import com.example.flyingdevicemanager.util.BaseResponse
+import com.example.flyingdevicemanager.util.base.BaseResponse
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -21,14 +21,20 @@ class UserFollowViewModel : ViewModel() {
     val responseRequestFollowResponse: MutableSharedFlow<Response<BaseResponse<Any>>> =
         MutableSharedFlow()
     
-    val listRequestFollowResponse: MutableSharedFlow<Response<BaseResponse<List<User>>>> = MutableSharedFlow()
+    val listRequestFollowResponse: MutableSharedFlow<Response<BaseResponse<List<User>>>> =
+        MutableSharedFlow()
     
-    val listFollowingResponse: MutableSharedFlow<Response<BaseResponse<List<User>>>> = MutableSharedFlow()
+    val listFollowingResponse: MutableSharedFlow<Response<BaseResponse<List<User>>>> =
+        MutableSharedFlow()
+    
+    val listUserDeviceResponse: MutableSharedFlow<Response<BaseResponse<List<Device>>>> =
+        MutableSharedFlow()
     
     val searchUserLoading: MutableLiveData<Boolean> = MutableLiveData()
     val responseRequestFollowLoading: MutableLiveData<Boolean> = MutableLiveData()
     val getListRequestFollowLoading: MutableLiveData<Boolean> = MutableLiveData()
     val listFollowingLoading: MutableLiveData<Boolean> = MutableLiveData()
+    val listUserDevicesLoading: MutableLiveData<Boolean> = MutableLiveData()
     
     fun searchUser(token: String, word: String) {
         searchUserLoading.postValue(true)
@@ -72,6 +78,15 @@ class UserFollowViewModel : ViewModel() {
             val response = repository.getListFollow(token)
             listFollowingResponse.emit(response)
             listFollowingLoading.postValue(false)
+        }
+    }
+    
+    fun getListUserDevices(token: String, userId: String) {
+        viewModelScope.launch {
+            listUserDevicesLoading.postValue(true)
+            val response = repository.getUserDevices(token, userId)
+            listUserDeviceResponse.emit(response)
+            listUserDevicesLoading.postValue(false)
         }
     }
 }

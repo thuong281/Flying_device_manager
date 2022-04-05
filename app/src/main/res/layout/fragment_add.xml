@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".app_ui.add_device.add.AddFragment"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/register_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Register name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/register_name_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_below="@id/register_name"
+        android:id="@+id/register_national_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Register id number">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/register_national_id_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_below="@id/register_national_id"
+        android:id="@+id/register_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Register phone number">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/register_phone_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_below="@id/register_phone"
+        android:id="@+id/device_plate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Device Plate">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/device_plate_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_below="@id/device_plate"
+        android:id="@+id/device_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Device color">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/device_color_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_below="@id/device_color"
+        android:id="@+id/device_manufacturer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Device manufacturer">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/device_manufacturer_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:layout_below="@id/device_manufacturer"-->
+<!--        android:id="@+id/device_buy_date"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Device buy date">-->
+
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:id="@+id/device_buy_date_text"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:focusable="false"/>-->
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
+
+    <TextView
+        android:id="@+id/device_buy_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/device_manufacturer"
+        android:padding="8dp"
+        android:text="Select device buy date" />
+
+    <Button
+        android:id="@+id/submit_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="10sp"
+        android:text="Add device" />
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/colorPrimary"
+        android:visibility="gone"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>

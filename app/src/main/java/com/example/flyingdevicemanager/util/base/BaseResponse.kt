@@ -1,7 +1,6 @@
-package com.example.flyingdevicemanager.util
+package com.example.flyingdevicemanager.util.base
 
 import com.google.gson.annotations.SerializedName
-import retrofit2.Response
 
 data class BaseResponse<T>(
     @SerializedName("msg")

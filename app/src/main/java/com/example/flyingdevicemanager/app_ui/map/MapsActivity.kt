@@ -12,6 +12,7 @@ import androidx.navigation.navArgs
 import com.example.flyingdevicemanager.R
 import com.example.flyingdevicemanager.databinding.ActivityMapsBinding
 import com.example.flyingdevicemanager.util.*
+import com.example.flyingdevicemanager.util.base.BaseResponse
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
 import io.socket.client.*
@@ -73,10 +74,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
     
     private fun initSocket() {
-        // get argument
         val userId = args.deviceId
         
-        viewModel.getDeviceLocation(getToken().toString(), userId)
+        viewModel.getDeviceLocation(getToken().toString(), userId.toString())
         
         // init socket listener
         socket.connect()

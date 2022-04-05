@@ -1,12 +1,14 @@
 package com.example.flyingdevicemanager.api
 
 import com.example.flyingdevicemanager.models.*
-import com.example.flyingdevicemanager.util.BaseResponse
+import com.example.flyingdevicemanager.util.base.BaseResponse
 import okhttp3.*
 import retrofit2.Response
 import retrofit2.http.*
 
 interface Api {
+    
+    // old part
     
     // login
     @POST("login")
@@ -42,8 +44,15 @@ interface Api {
     
     // get current user device list
     @GET("api/device/user-device-list")
+    suspend fun getCurrentUserDevices(
+        @Header("auth-token") token: String,
+    ): Response<BaseResponse<List<Device>>>
+    
+    // get other user device list
+    @GET("api/device/device-list")
     suspend fun getUserDevices(
         @Header("auth-token") token: String,
+        @Query("user_id") userId: String
     ): Response<BaseResponse<List<Device>>>
     
     // add device
@@ -146,4 +155,58 @@ interface Api {
         @Path("user_id") userId: String
     ): Response<BaseResponse<Any>>
     
+    
+    // new part
+    @POST("api/device/insert")
+    @FormUrlEncoded
+    suspend fun insertNewDevice(
+        @Header("auth-token") token: String,
+        @Field("register_name") registerName: String,
+        @Field("register_national_id") registerNationalId: String,
+        @Field("register_phone") registerPhone: String,
+        @Field("device_plate") devicePlate: String,
+        @Field("device_color") deviceColor: String,
+        @Field("device_manufacturer") deviceManufacturer: String,
+        @Field("device_buy_date") deviceBuyDate: String,
+    ): Response<BaseResponse<Any>>
+    
+    // get list add device history
+    @GET("api/device/insert-history/{page}")
+    suspend fun getListAddDeviceHistory(
+        @Header("auth-token") token: String,
+        @Path("page") page: Int
+    ): Response<BaseResponse<List<Device2>>>
+    
+    // search register
+    @GET("api/register/search")
+    suspend fun searchRegister(
+        @Header("auth-token") token: String,
+        @Query("word") word: String
+    ): Response<BaseResponse<List<Register>>>
+    
+    // search device
+    @GET("api/device/search")
+    suspend fun searchDevice(
+        @Header("auth-token") token: String,
+        @Query("word") word: String
+    ): Response<BaseResponse<List<Device2>>>
+    
+    // get device by device id
+    @GET("api/device")
+    suspend fun getDeviceById(
+        @Header("auth-token") token: String,
+        @Query("id") id: String
+    ): Response<BaseResponse<Device2>>
+    
+    // update device
+    @PUT("api/device/update")
+    @FormUrlEncoded
+    suspend fun updateDevice(
+        @Header("auth-token") token: String,
+        @Field("device_id") deviceId: String,
+        @Field("device_palate") devicePlate: String,
+        @Field("device_color") deviceColor: String,
+        @Field("device_manufacturer") deviceManufacturer: String,
+        @Field("device_buy_date") deviceBuyDate: String,
+    ): Response<BaseResponse<Any>>
 }

@@ -2,11 +2,10 @@ package com.example.flyingdevicemanager.app_ui.user_profile
 
 import android.net.Uri
 import androidx.lifecycle.*
-import androidx.lifecycle.switchMap
 import androidx.paging.*
 import com.example.flyingdevicemanager.models.*
 import com.example.flyingdevicemanager.repository.Repository
-import com.example.flyingdevicemanager.util.BaseResponse
+import com.example.flyingdevicemanager.util.base.BaseResponse
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import okhttp3.MultipartBody
@@ -92,8 +91,6 @@ class UserViewModel : ViewModel() {
             userKycLoading.postValue(false)
         }
     }
-    
-    val token: MutableLiveData<String> = MutableLiveData()
     
     var pagingFlow: LiveData<PagingData<User>> = MutableLiveData()
     

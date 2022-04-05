@@ -7,7 +7,7 @@ import com.example.flyingdevicemanager.databinding.UserItemBinding
 import com.example.flyingdevicemanager.models.User
 import com.squareup.picasso.Picasso
 
-class UserFollowingAdapter : RecyclerView.Adapter<UserFollowingAdapter.MyViewHolder>() {
+class UserFollowingAdapter(private val listener: ClickListener) : RecyclerView.Adapter<UserFollowingAdapter.MyViewHolder>() {
     
     var items = listOf<User>()
         @SuppressLint("NotifyDataSetChanged")
@@ -43,6 +43,9 @@ class UserFollowingAdapter : RecyclerView.Adapter<UserFollowingAdapter.MyViewHol
     
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bind(items[position])
+        holder.item.setOnClickListener {
+            listener.showDevices(items[position])
+        }
     }
     
     override fun getItemCount() = items.size

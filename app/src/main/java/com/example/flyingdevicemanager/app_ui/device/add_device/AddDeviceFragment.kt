@@ -11,6 +11,7 @@ import com.example.flyingdevicemanager.R
 import com.example.flyingdevicemanager.app_ui.device.DeviceViewModel
 import com.example.flyingdevicemanager.databinding.*
 import com.example.flyingdevicemanager.util.*
+import com.example.flyingdevicemanager.util.base.BaseResponse
 import kotlinx.coroutines.flow.collectLatest
 import retrofit2.Response
 
@@ -80,7 +81,7 @@ class AddDeviceFragment : DialogFragment() {
         val dialog: Dialog? = dialog
         if (dialog != null) {
             val width = (resources.displayMetrics.widthPixels * 0.90).toInt()
-            val height = (resources.displayMetrics.heightPixels * 0.70).toInt()
+            val height = (resources.displayMetrics.heightPixels * 0.40).toInt()
             dialog.window!!.setLayout(width, height)
         }
     }

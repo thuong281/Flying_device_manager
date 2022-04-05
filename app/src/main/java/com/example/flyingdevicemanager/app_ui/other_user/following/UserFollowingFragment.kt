@@ -6,18 +6,22 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.*
 import androidx.lifecycle.lifecycleScope
+import com.example.flyingdevicemanager.R
 import com.example.flyingdevicemanager.app_ui.other_user.UserFollowViewModel
+import com.example.flyingdevicemanager.app_ui.other_user.following.user_device.UserDeviceFragment
 import com.example.flyingdevicemanager.databinding.FragmentUserFollowingBinding
+import com.example.flyingdevicemanager.models.User
 import com.example.flyingdevicemanager.util.*
+import com.example.flyingdevicemanager.util.base.BaseResponse
 import kotlinx.coroutines.flow.collectLatest
 import retrofit2.Response
 
-class UserFollowingFragment : Fragment() {
+class UserFollowingFragment : Fragment(), UserFollowingAdapter.ClickListener {
     
     lateinit var binding: FragmentUserFollowingBinding
     private val viewModel: UserFollowViewModel by activityViewModels()
     
-    private val adapter: UserFollowingAdapter by lazy { UserFollowingAdapter() }
+    private val adapter: UserFollowingAdapter by lazy { UserFollowingAdapter(this) }
     
     private lateinit var sharedPreferences: SharedPreferences
     
@@ -90,6 +94,16 @@ class UserFollowingFragment : Fragment() {
             ErrorUtils.parseMessage(response as Response<Any>).errorMessage,
             Toast.LENGTH_SHORT
         ).show()
+    }
+    
+    private fun showDialog(fragment: DialogFragment) {
+        val fm: FragmentManager? = fragmentManager
+        fragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_AppCompat_Light_NoActionBar)
+        fragment.show(fm!!, "")
+    }
+    
+    override fun showDevices(user: User) {
+        showDialog(UserDeviceFragment(user))
     }
     
 }

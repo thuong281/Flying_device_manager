@@ -11,33 +11,32 @@ import com.example.flyingdevicemanager.R
 import com.example.flyingdevicemanager.app_ui.device.add_device.AddDeviceFragment
 import com.example.flyingdevicemanager.databinding.FragmentDeviceBinding
 import com.example.flyingdevicemanager.models.Device
-import com.example.flyingdevicemanager.util.*
+import com.example.flyingdevicemanager.util.ErrorUtils
+import com.example.flyingdevicemanager.util.base.*
 import kotlinx.coroutines.flow.collectLatest
 import retrofit2.Response
 
-class DeviceFragment : Fragment(), DeviceAdapter.ClickListener {
+class DeviceFragment : BaseFragment<FragmentDeviceBinding>(
+    FragmentDeviceBinding::inflate
+), DeviceAdapter.ClickListener {
     
-    lateinit var binding: FragmentDeviceBinding
     private val viewModel: DeviceViewModel by activityViewModels()
     
     private val adapter: DeviceAdapter by lazy { DeviceAdapter(this) }
     
-    lateinit var sharedPreferences: SharedPreferences
-    
     lateinit var navController: NavController
     
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        sharedPreferences = activity!!.getSharedPreferences(
-            "SHARED_PREF",
-            Context.MODE_PRIVATE
-        )
-        // Inflate the layout for this fragment
-        binding = FragmentDeviceBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+//    override fun onCreateView(
+//        inflater: LayoutInflater, container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View {
+//        sharedPreferences = activity!!.getSharedPreferences(
+//            "SHARED_PREF",
+//            Context.MODE_PRIVATE
+//        )
+//        // Inflate the layout for this fragment
+//        return binding?.root
+//    }
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,7 +48,7 @@ class DeviceFragment : Fragment(), DeviceAdapter.ClickListener {
     }
     
     private fun initRv() {
-        binding.rv.adapter = adapter
+        binding!!.rv.adapter = adapter
     }
     
     private fun loadData() {
@@ -58,7 +57,7 @@ class DeviceFragment : Fragment(), DeviceAdapter.ClickListener {
     
     private fun observeData() {
         viewModel.loadingList.observe(viewLifecycleOwner) {
-            binding.freshLayout.isRefreshing = it
+            binding!!.freshLayout.isRefreshing = it
         }
         
         lifecycleScope.launchWhenCreated {
@@ -68,7 +67,7 @@ class DeviceFragment : Fragment(), DeviceAdapter.ClickListener {
                         if (it.body()?.data?.size == 0) {
                             binding.noData.visibility = View.VISIBLE
                         } else {
-                            binding.noData.visibility = View.GONE
+                            binding!!.noData.visibility = View.GONE
                         }
                         adapter.items = it.body()?.data ?: ArrayList()
                     }
@@ -118,33 +117,25 @@ class DeviceFragment : Fragment(), DeviceAdapter.ClickListener {
         
         viewModel.loading.observe(viewLifecycleOwner) {
             if (it) {
-                binding.loading.visibility = View.VISIBLE
+                binding!!.loading.visibility = View.VISIBLE
             } else {
-                binding.loading.visibility = View.GONE
+                binding!!.loading.visibility = View.GONE
             }
         }
     }
     
     private fun handleAction() {
-        binding.btnAdd.setOnClickListener {
+        binding!!.btnAdd.setOnClickListener {
             viewModel.getUserKyc(getToken().toString())
         }
         
-        binding.freshLayout.setOnRefreshListener {
+        binding!!.freshLayout.setOnRefreshListener {
             loadData()
         }
         
     }
     
-    private fun showDialog(fragment: DialogFragment) {
-        val fm: FragmentManager? = fragmentManager
-        fragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_AppCompat_Light_NoActionBar)
-        fragment.show(fm!!, "")
-    }
-    
-    private fun getToken(): String? {
-        return sharedPreferences.getString("token", "")
-    }
+  
     
     override fun showOnMap(device: Device) {
 //        Toast.makeText(context, "suc cac", Toast.LENGTH_SHORT).show()
@@ -155,14 +146,6 @@ class DeviceFragment : Fragment(), DeviceAdapter.ClickListener {
     
     override fun deleteDevice(device: Device) {
         viewModel.deleteDevice(getToken().toString(), device.deviceId.toString())
-    }
-    
-    private fun errorMessage(response: Response<BaseResponse<Any>>) {
-        Toast.makeText(
-            context,
-            ErrorUtils.parseMessage(response as Response<Any>).errorMessage,
-            Toast.LENGTH_SHORT
-        ).show()
     }
     
 }

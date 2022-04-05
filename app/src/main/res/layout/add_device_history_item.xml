@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
+
+        <LinearLayout
+            android:id="@+id/info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/register_name"
+                android:textSize="16sp"
+                style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="pepe@gmail.com"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/device_plate"
+                android:textSize="16sp"
+                style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="pepe@gmail.com"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_marginHorizontal="8dp"
+                android:layout_gravity="end"
+                android:id="@+id/add_date"
+                android:textSize="16sp"
+                style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="id: 1231244"
+                android:textColor="@color/boldGray" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/info"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/round_backgroud" />
+
+    </RelativeLayout>
+
+</LinearLayout>
+

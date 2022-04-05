@@ -1,10 +1,12 @@
 package com.example.flyingdevicemanager.repository
 
 import androidx.paging.*
+import androidx.paging.PagingConfig.Companion.MAX_SIZE_UNBOUNDED
 import com.example.flyingdevicemanager.api.RetrofitInstance
+import com.example.flyingdevicemanager.app_ui.add_device.history.paging.DevicePagingSource
 import com.example.flyingdevicemanager.app_ui.user_profile.review_user_kyc.paging.UserPagingSource
 import com.example.flyingdevicemanager.models.*
-import com.example.flyingdevicemanager.util.BaseResponse
+import com.example.flyingdevicemanager.util.base.BaseResponse
 import okhttp3.*
 import retrofit2.Response
 
@@ -29,7 +31,13 @@ class Repository {
     }
     
     suspend fun getCurrentUserDevices(token: String): Response<BaseResponse<List<Device>>> {
-        return RetrofitInstance.api.getUserDevices(token)
+        return RetrofitInstance.api.getCurrentUserDevices(token)
+    }
+    
+    suspend fun getUserDevices(
+        token: String, userId: String
+    ): Response<BaseResponse<List<Device>>> {
+        return RetrofitInstance.api.getUserDevices(token, userId)
     }
     
     suspend fun addDevice(token: String, deviceName: String): Response<BaseResponse<Any>> {
@@ -78,10 +86,6 @@ class Repository {
         return RetrofitInstance.api.updateAvatar(token, image)
     }
     
-//    suspend fun getAllUserKyc(token: String): Response<BaseResponse<List<User>>> {
-//        return RetrofitInstance.api.getAllUserKyc(token)
-//    }
-    
     suspend fun getOtherUserKyc(token: String, userId: String): Response<BaseResponse<UserKyc>> {
         return RetrofitInstance.api.getOtherUserKyc(token, userId)
     }
@@ -96,11 +100,63 @@ class Repository {
     
     fun getAllUserKycPaging(token: String) = Pager(
         config = PagingConfig(
-            pageSize = 2,
-            maxSize = 100,
+            pageSize = 10,
+            maxSize = MAX_SIZE_UNBOUNDED,
             enablePlaceholders = false
         ),
         pagingSourceFactory = { UserPagingSource(RetrofitInstance.api, token) }
     ).liveData
     
+    suspend fun insertNewDevice(
+        token: String, registerName: String, registerNationalId: String, registerPhone: String,
+        devicePlate: String, deviceColor: String, deviceManufacturer: String, deviceBuyDate: String
+    ): Response<BaseResponse<Any>> {
+        return RetrofitInstance.api.insertNewDevice(
+            token,
+            registerName,
+            registerNationalId,
+            registerPhone,
+            devicePlate,
+            deviceColor,
+            deviceManufacturer,
+            deviceBuyDate
+        )
+    }
+    
+    fun getListAddDeviceHistory(token: String) = Pager(
+        config = PagingConfig(
+            pageSize = 20,
+            maxSize = MAX_SIZE_UNBOUNDED,
+            enablePlaceholders = false
+        ),
+        pagingSourceFactory = { DevicePagingSource(RetrofitInstance.api, token) }
+    ).liveData
+    
+    suspend fun searchRegister(
+        token: String, word: String
+    ): Response<BaseResponse<List<Register>>> {
+        return RetrofitInstance.api.searchRegister(token, word)
+    }
+    
+    suspend fun searchDevice(token: String, word: String): Response<BaseResponse<List<Device2>>> {
+        return RetrofitInstance.api.searchDevice(token, word)
+    }
+    
+    suspend fun getDeviceById(token: String, id: String): Response<BaseResponse<Device2>> {
+        return RetrofitInstance.api.getDeviceById(token, id)
+    }
+    
+    suspend fun updateDevice(
+        token: String, deviceId: String, devicePlate: String, deviceColor: String,
+        deviceManufacturer: String, deviceBuyDate: String
+    ): Response<BaseResponse<Any>> {
+        return RetrofitInstance.api.updateDevice(
+            token,
+            deviceId,
+            devicePlate,
+            deviceColor,
+            deviceManufacturer,
+            deviceBuyDate
+        )
+    }
 }

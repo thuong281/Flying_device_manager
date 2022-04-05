@@ -14,41 +14,44 @@ import com.example.flyingdevicemanager.app_ui.user_profile.review_user_kyc.pagin
 import com.example.flyingdevicemanager.databinding.FragmentListUserKycBinding
 import com.example.flyingdevicemanager.models.User
 import com.example.flyingdevicemanager.util.*
+import com.example.flyingdevicemanager.util.base.*
 import kotlinx.coroutines.flow.collectLatest
 import retrofit2.Response
 
-class ListUserKycFragment : DialogFragment(), UserPagingAdapter.ClickListener {
+class ListUserKycFragment : BaseDialogFragment<FragmentListUserKycBinding>(
+    FragmentListUserKycBinding::inflate
+), UserPagingAdapter.ClickListener {
     
-    lateinit var binding: FragmentListUserKycBinding
+//    lateinit var binding: FragmentListUserKycBinding
     private val viewModel: UserViewModel by activityViewModels()
     
     private val adapterUserPaging: UserPagingAdapter by lazy { UserPagingAdapter(this) }
     
-    lateinit var sharedPreferences: SharedPreferences
+//    lateinit var sharedPreferences: SharedPreferences
     
-    override fun onStart() {
-        super.onStart()
-        val dialog: Dialog? = dialog
-        if (dialog != null) {
-            val width = ViewGroup.LayoutParams.MATCH_PARENT
-            val height = ViewGroup.LayoutParams.MATCH_PARENT
-            dialog.window!!.setLayout(width, height)
-        }
-    }
+//    override fun onStart() {
+//        super.onStart()
+//        val dialog: Dialog? = dialog
+//        if (dialog != null) {
+//            val width = ViewGroup.LayoutParams.MATCH_PARENT
+//            val height = ViewGroup.LayoutParams.MATCH_PARENT
+//            dialog.window!!.setLayout(width, height)
+//        }
+//    }
     
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        sharedPreferences = activity!!.getSharedPreferences(
-            "SHARED_PREF",
-            Context.MODE_PRIVATE
-        )
-        // Inflate the layout for this fragment
-        binding = FragmentListUserKycBinding.inflate(layoutInflater)
-        dialog?.setCanceledOnTouchOutside(false)
-        return binding.root
-    }
+//    override fun onCreateView(
+//        inflater: LayoutInflater, container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View {
+//        sharedPreferences = activity!!.getSharedPreferences(
+//            "SHARED_PREF",
+//            Context.MODE_PRIVATE
+//        )
+//        // Inflate the layout for this fragment
+//        binding = FragmentListUserKycBinding.inflate(layoutInflater)
+//        dialog?.setCanceledOnTouchOutside(false)
+//        return binding.root
+//    }
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -84,6 +87,7 @@ class ListUserKycFragment : DialogFragment(), UserPagingAdapter.ClickListener {
                 when (loadStates.refresh) {
                     is LoadState.Loading -> binding.loading.visibility = View.VISIBLE
                     is LoadState.Error -> {
+                        binding.loading.visibility = View.GONE
                         Toast.makeText(
                             context,
                             (loadStates.refresh as LoadState.Error).error.message.toString(),
@@ -110,23 +114,23 @@ class ListUserKycFragment : DialogFragment(), UserPagingAdapter.ClickListener {
         }
     }
     
-    private fun getToken(): String? {
-        return sharedPreferences.getString("token", "")
-    }
+//    private fun getToken(): String? {
+//        return sharedPreferences.getString("token", "")
+//    }
     
-    private fun errorMessage(response: Response<BaseResponse<Any>>) {
-        Toast.makeText(
-            context,
-            ErrorUtils.parseMessage(response as Response<Any>).errorMessage,
-            Toast.LENGTH_SHORT
-        ).show()
-    }
+//    private fun errorMessage(response: Response<BaseResponse<Any>>) {
+//        Toast.makeText(
+//            context,
+//            ErrorUtils.parseMessage(response as Response<Any>).errorMessage,
+//            Toast.LENGTH_SHORT
+//        ).show()
+//    }
     
-    private fun showDialog(fragment: DialogFragment) {
-        val fm: FragmentManager? = fragmentManager
-        fragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_AppCompat_Light_NoActionBar)
-        fragment.show(fm!!, "")
-    }
+//    private fun showDialog(fragment: DialogFragment) {
+//        val fm: FragmentManager? = fragmentManager
+//        fragment.setStyle(STYLE_NORMAL, R.style.Theme_AppCompat_Light_NoActionBar)
+//        fragment.show(fm!!, "")
+//    }
     
     override fun showUserKycDetail(user: User, position: Int) {
         val fragment = UserKycDetailFragment(user, position)

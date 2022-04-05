@@ -9,11 +9,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.*
 import androidx.lifecycle.lifecycleScope
-import com.example.flyingdevicemanager.R
 import com.example.flyingdevicemanager.app_ui.user_profile.UserViewModel
 import com.example.flyingdevicemanager.databinding.*
 import com.example.flyingdevicemanager.models.*
 import com.example.flyingdevicemanager.util.*
+import com.example.flyingdevicemanager.util.base.BaseResponse
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.flow.collectLatest
 import retrofit2.Response
