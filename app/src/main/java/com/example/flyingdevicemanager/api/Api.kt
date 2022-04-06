@@ -241,4 +241,11 @@ interface Api {
         @Field("national_id") nationalId: String,
         @Field("phone_number") phoneNumber: String,
     ): Response<BaseResponse<Any>>
+    
+    // delete register
+    @DELETE("/api/register/{id}")
+    suspend fun deleteRegister(
+        @Header("auth-token") token: String,
+        @Path("id") registerId: String
+    ): Response<BaseResponse<Any>>
 }

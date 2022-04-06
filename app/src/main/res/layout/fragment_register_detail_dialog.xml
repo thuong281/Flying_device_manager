@@ -43,6 +43,17 @@
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
+            <ImageView
+                android:id="@+id/btn_refresh"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@color/colorPrimary"
+                android:padding="7dp"
+                android:src="@drawable/ic_baseline_refresh_24"
+                app:tint="@color/white" />
+
         </RelativeLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -234,6 +245,17 @@
                     android:elevation="5dp"
                     app:strokeColor="@color/grayLine"
                     app:strokeWidth="2dp">
+
+                    <TextView
+                        android:id="@+id/no_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="No Device"
+                        android:textColor="@color/black"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        android:visibility="visible"
+                        android:layout_gravity="center"/>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv"

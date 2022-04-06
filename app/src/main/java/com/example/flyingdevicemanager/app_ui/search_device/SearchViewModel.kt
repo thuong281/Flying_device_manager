@@ -30,6 +30,8 @@ class SearchViewModel : ViewModel() {
     
     val updateRegisterResponse: MutableSharedFlow<Response<BaseResponse<Any>>> = MutableSharedFlow()
     
+    val deleteRegisterResponse: MutableSharedFlow<Response<BaseResponse<Any>>> = MutableSharedFlow()
+    
     val loading: MutableLiveData<Boolean> = MutableLiveData()
     
     val deviceDetailLoading: MutableLiveData<Boolean> = MutableLiveData()
@@ -115,6 +117,15 @@ class SearchViewModel : ViewModel() {
             val response = repository.updateRegister(token, registerId, name, nationalId, phoneNumber)
             updateRegisterResponse.emit(response)
             updateRegisterLoading.postValue(false)
+        }
+    }
+    
+    fun deleteRegister(token: String, registerId: String) {
+        registerDetailLoading.postValue(true)
+        viewModelScope.launch {
+            val response = repository.deleteRegister(token, registerId)
+            deleteRegisterResponse.emit(response)
+            registerDetailLoading.postValue(false)
         }
     }
 }

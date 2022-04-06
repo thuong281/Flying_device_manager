@@ -7,7 +7,8 @@ import com.example.flyingdevicemanager.R
 import com.example.flyingdevicemanager.databinding.*
 import com.example.flyingdevicemanager.models.*
 
-class SearchAdapter(private val listener: ClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SearchAdapter(private val listener: ClickListener) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     
     class DeviceViewHolder(private val binding: DeviceItem2Binding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -16,7 +17,11 @@ class SearchAdapter(private val listener: ClickListener) : RecyclerView.Adapter<
         fun bind(device: Device2) {
             binding.name.text = device.devicePlate
             binding.deviceId.text = device.id
-            binding.activeStatus.visibility = View.GONE
+            if (device.isActive == true) {
+                binding.activeStatus.setImageResource(R.drawable.ic_online)
+            } else {
+                binding.activeStatus.setImageResource(R.drawable.ic_offline)
+            }
         }
     }
     
@@ -91,7 +96,7 @@ class SearchAdapter(private val listener: ClickListener) : RecyclerView.Adapter<
     
     override fun getItemCount() = items.size
     
-    interface ClickListener{
+    interface ClickListener {
         fun onDeviceClick(id: String)
         fun onRegisterClick(id: String)
     }

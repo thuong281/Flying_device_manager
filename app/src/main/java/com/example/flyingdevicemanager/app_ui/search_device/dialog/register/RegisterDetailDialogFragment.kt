@@ -2,8 +2,10 @@ package com.example.flyingdevicemanager.app_ui.search_device.dialog.register
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.flyingdevicemanager.R
 import com.example.flyingdevicemanager.app_ui.search_device.*
 import com.example.flyingdevicemanager.app_ui.search_device.dialog.device.*
 import com.example.flyingdevicemanager.databinding.FragmentRegisterDetailDialogBinding
@@ -63,9 +65,29 @@ class RegisterDetailDialogFragment(private val registerId: String) :
             viewModel.getListDevicesResponse.collectLatest {
                 when (it.code()) {
                     200 -> {
-                        adapter.items = it.body()?.data as MutableList<Device2>
+                        val data = it.body()?.data as MutableList<Device2>
+                        if (data.size > 0) {
+                            adapter.items = it.body()?.data as MutableList<Device2>
+                            binding.noData.visibility = View.GONE
+                        } else {
+                            binding.noData.visibility = View.VISIBLE
+                        }
+                        
                     }
                     else -> errorMessage(it as Response<BaseResponse<Any>>)
+                }
+            }
+        }
+        
+        lifecycleScope.launchWhenCreated {
+            viewModel.deleteRegisterResponse.collectLatest {
+                when (it.code()) {
+                    200 -> {
+                        Toast.makeText(context, "Delete successfully", Toast.LENGTH_SHORT).show()
+                        dismiss()
+                        closeCallBack?.invoke()
+                    }
+                    else -> errorMessage(it)
                 }
             }
         }
@@ -87,6 +109,11 @@ class RegisterDetailDialogFragment(private val registerId: String) :
             closeCallBack!!.invoke()
             dismiss()
         }
+        
+        binding.btnRefresh.setOnClickListener {
+            loadData()
+        }
+        
         binding.update.setOnClickListener {
             if (currentRegister == null) return@setOnClickListener
             val dialog = UpdateRegisterDialogFragment(currentRegister!!)
@@ -94,6 +121,23 @@ class RegisterDetailDialogFragment(private val registerId: String) :
                 loadData()
             }
             showDialog(dialog)
+        }
+        
+        binding.delete.setOnClickListener {
+            val confirmDialog = BaseConfirmDialog(
+                context!!,
+                R.style.Theme_Confirm_Dialog
+            )
+            confirmDialog.setTitle("Warning")
+                .setDialogMessage("Do you really want to remove this register?")
+                .setDialogConfirmText("Confirm")
+                .setDialogCloseText("Close")
+                .show()
+            
+            confirmDialog.setOnConfirmDialogListener {
+                viewModel.deleteRegister(getToken().toString(), registerId)
+                confirmDialog.dismiss()
+            }
         }
     }
     

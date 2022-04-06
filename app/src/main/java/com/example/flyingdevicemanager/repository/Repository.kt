@@ -177,4 +177,8 @@ class Repository {
     ): Response<BaseResponse<Any>> {
         return RetrofitInstance.api.updateRegister(token, registerId, name, nationalId, phoneNumber)
     }
+    
+    suspend fun deleteRegister(token: String, registerId: String): Response<BaseResponse<Any>> {
+        return RetrofitInstance.api.deleteRegister(token, registerId)
+    }
 }

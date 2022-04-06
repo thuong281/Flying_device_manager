@@ -83,6 +83,13 @@ class DeviceDetailDialogFragment(private val deviceId: String) :
                 data.lastUpdated?.let { TimeUtils.convertMillisToDateDetail(it) }
             binding.updateUser.text = data.updatedUser
         }
+        if (data.isActive == true) {
+            binding.online.visibility = View.VISIBLE
+            binding.offline.visibility = View.GONE
+        } else {
+            binding.online.visibility = View.GONE
+            binding.offline.visibility = View.VISIBLE
+        }
         
     }
     
@@ -95,6 +102,11 @@ class DeviceDetailDialogFragment(private val deviceId: String) :
             closeCallBack!!.invoke()
             dismiss()
         }
+        
+        binding.btnRefresh.setOnClickListener {
+            loadData()
+        }
+        
         binding.update.setOnClickListener {
             if (currentDevice == null) return@setOnClickListener
             val dialog = UpdateDeviceDialogFragment(currentDevice!!)

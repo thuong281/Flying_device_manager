@@ -27,5 +27,9 @@ data class Device2(
     @SerializedName("updatedUser")
     val updatedUser: String? = "",
     @SerializedName("__v")
-    val v: Int? = 0
+    val v: Int? = 0,
+    @SerializedName("isActive")
+    val isActive: Boolean? = false,
+    @SerializedName("updatedLocationTime")
+    val updatedLocationTime: Long? = 0
 )
