@@ -16,4 +16,9 @@
         <item name="materialCalendarFullscreenTheme">@style/ThemeOverlay.MaterialComponents.MaterialCalendar.Fullscreen</item>
         <item name="materialCalendarTheme">@style/ThemeOverlay.MaterialComponents.MaterialCalendar</item>
     </style>
+
+    <style name="Theme_Confirm_Dialog" parent="android:Theme.Holo.Dialog">
+        <item name="android:windowMinWidthMajor">85%</item>
+        <item name="android:windowMinWidthMinor">85%</item>
+    </style>
 </resources>

@@ -64,11 +64,11 @@ interface Api {
     ): Response<BaseResponse<Any>>
     
     // delete device
-    @DELETE("api/device/delete-device/{device_id}")
-    suspend fun deleteDevice(
-        @Header("auth-token") token: String,
-        @Path("device_id") deviceId: String
-    ): Response<BaseResponse<Any>>
+//    @DELETE("api/device/delete-device/{device_id}")
+//    suspend fun deleteDevice(
+//        @Header("auth-token") token: String,
+//        @Path("device_id") deviceId: String
+//    ): Response<BaseResponse<Any>>
     
     // search user
     @GET("api/user/find-user")
@@ -208,5 +208,37 @@ interface Api {
         @Field("device_color") deviceColor: String,
         @Field("device_manufacturer") deviceManufacturer: String,
         @Field("device_buy_date") deviceBuyDate: String,
+    ): Response<BaseResponse<Any>>
+    
+    // delete device
+    @DELETE("api/device/{device_id}")
+    suspend fun deleteDevice(
+        @Header("auth-token") token: String,
+        @Path("device_id") deviceId: String
+    ): Response<BaseResponse<Any>>
+    
+    // get single register by id
+    @GET("/api/register/")
+    suspend fun getRegister(
+        @Header("auth-token") token: String,
+        @Query("id") id: String
+    ): Response<BaseResponse<Register>>
+    
+    // get list device of register
+    @GET("/api/register/devices")
+    suspend fun getListDevices(
+        @Header("auth-token") token: String,
+        @Query("id") id: String
+    ): Response<BaseResponse<List<Device2>>>
+    
+    // update register
+    @PUT("api/register/update")
+    @FormUrlEncoded
+    suspend fun updateRegister(
+        @Header("auth-token") token: String,
+        @Field("register_id") registerId: String,
+        @Field("name") name: String,
+        @Field("national_id") nationalId: String,
+        @Field("phone_number") phoneNumber: String,
     ): Response<BaseResponse<Any>>
 }

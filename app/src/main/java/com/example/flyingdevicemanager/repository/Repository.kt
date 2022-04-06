@@ -43,10 +43,10 @@ class Repository {
     suspend fun addDevice(token: String, deviceName: String): Response<BaseResponse<Any>> {
         return RetrofitInstance.api.addDevice(token, deviceName)
     }
-    
-    suspend fun deleteDevice(token: String, deviceID: String): Response<BaseResponse<Any>> {
-        return RetrofitInstance.api.deleteDevice(token, deviceID)
-    }
+
+//    suspend fun deleteDevice(token: String, deviceID: String): Response<BaseResponse<Any>> {
+//        return RetrofitInstance.api.deleteDevice(token, deviceID)
+//    }
     
     suspend fun searchUser(token: String, word: String): Response<BaseResponse<List<UserFollow>>> {
         return RetrofitInstance.api.searchUser(token, word)
@@ -158,5 +158,23 @@ class Repository {
             deviceManufacturer,
             deviceBuyDate
         )
+    }
+    
+    suspend fun deleteDevice(token: String, deviceId: String): Response<BaseResponse<Any>> {
+        return RetrofitInstance.api.deleteDevice(token, deviceId)
+    }
+    
+    suspend fun getRegister(token: String, id: String): Response<BaseResponse<Register>> {
+        return RetrofitInstance.api.getRegister(token, id)
+    }
+    
+    suspend fun getListDevices(token: String, id: String): Response<BaseResponse<List<Device2>>> {
+        return RetrofitInstance.api.getListDevices(token, id)
+    }
+    
+    suspend fun updateRegister(
+        token: String, registerId: String, name: String, nationalId: String, phoneNumber: String
+    ): Response<BaseResponse<Any>> {
+        return RetrofitInstance.api.updateRegister(token, registerId, name, nationalId, phoneNumber)
     }
 }

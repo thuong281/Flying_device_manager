@@ -1,6 +1,5 @@
-package com.example.flyingdevicemanager.app_ui.search_device.dialog
+package com.example.flyingdevicemanager.app_ui.search_device.dialog.device
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
@@ -10,7 +9,9 @@ import com.example.flyingdevicemanager.R
 import com.example.flyingdevicemanager.app_ui.search_device.SearchViewModel
 import com.example.flyingdevicemanager.databinding.FragmentUpdateDeviceDialogBinding
 import com.example.flyingdevicemanager.models.Device2
+import com.example.flyingdevicemanager.util.TimeUtils
 import com.example.flyingdevicemanager.util.base.BaseDialogFragment
+import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.coroutines.flow.collectLatest
 
 class UpdateDeviceDialogFragment(private val previousDevice: Device2) :
@@ -33,6 +34,21 @@ class UpdateDeviceDialogFragment(private val previousDevice: Device2) :
         binding.btnBack.setOnClickListener {
             dismiss()
         }
+    
+        binding.deviceBuyDate.setOnClickListener {
+            val datePicker =
+                MaterialDatePicker.Builder.datePicker()
+                    .setTitleText("Select date")
+                    .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                    .build()
+        
+            datePicker.show(parentFragmentManager, "date")
+        
+            datePicker.addOnPositiveButtonClickListener {
+                binding.deviceBuyDate.text = TimeUtils.convertMillisToDate(it)
+            }
+        }
+        
         binding.save.setOnClickListener {
             viewModel.updateDevice(
                 getToken().toString(),

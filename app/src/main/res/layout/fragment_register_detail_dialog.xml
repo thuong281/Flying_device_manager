@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".app_ui.device.add_device.AddDeviceFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <RelativeLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            app:layout_scrollFlags="scroll|enterAlways|snap">
+
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="7dp"
+                android:background="@color/colorPrimary"
+                android:padding="7dp"
+                android:src="@drawable/ic_baseline_arrow_back_24"
+                app:tint="@color/white" />
+
+
+            <TextView
+                android:id="@+id/txt_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:maxLines="2"
+                android:text="Register name"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_above="@id/delete"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:id="@+id/loading"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/colorPrimary"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintVertical_bias="0"
+                android:id="@+id/container"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:padding="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Register information"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/update"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="Update"
+                        android:textColor="#2196F3"
+                        android:textSize="18sp" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/grayLine" />
+
+                <LinearLayout
+                    android:padding="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="4dp"
+                        android:src="@drawable/ic_baseline_person_24"
+                        app:tint="?attr/colorControlNormal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Register name: "
+                        android:textColor="@color/black"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:id="@+id/register_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="pepe A"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:padding="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="4dp"
+                        android:src="@drawable/ic_baseline_credit_card_24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Citizen card: "
+                        android:textColor="@color/black"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:id="@+id/citizen_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="12345678"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:padding="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="4dp"
+                        android:src="@drawable/ic_baseline_phone_android_24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Phone number: "
+                        android:textColor="@color/black"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:id="@+id/phone_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="1234345435"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:padding="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="4dp"
+                        android:src="@drawable/ic_baseline_view_list_24"
+                        app:tint="?attr/colorControlNormal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="List device:  "
+                        android:textColor="@color/black"
+                        android:textSize="20sp"/>
+
+                </LinearLayout>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="5dp"
+                    android:layout_margin="8dp"
+                    android:elevation="5dp"
+                    app:strokeColor="@color/grayLine"
+                    app:strokeWidth="2dp">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="8dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/device_item_2" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_white_round_radius_10dp"
+            android:elevation="4dp"
+            android:text="Delete register"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:backgroundTint="@color/red"
+            app:icon="@drawable/ic_baseline_delete_forever_24"
+            app:iconGravity="textStart" />
+
+    </RelativeLayout>
+
+</LinearLayout>

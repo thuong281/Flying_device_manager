@@ -3,12 +3,14 @@ package com.example.flyingdevicemanager.models
 import com.google.gson.annotations.SerializedName
 
 data class Register(
+    @SerializedName("_id")
+    val id: String? = "",
     @SerializedName("name")
     val name: String? = "",
-    @SerializedName("national_id")
+    @SerializedName("nationalId")
     val nationalId: String? = "",
-    @SerializedName("phone_number")
+    @SerializedName("phoneNumber")
     val phoneNumber: String? = "",
-    @SerializedName("device_count")
-    val deviceCount: Int? = 0,
+    @SerializedName("listDeviceId")
+    val listDeviceId: List<String>? = ArrayList(),
 )

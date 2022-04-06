@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_round_radius_10dp"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="7dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/bg_green_corner_top_left_right"
+        android:text="Thông báo"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="10dp"
+        android:textSize="16sp"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        tools:text="Bạn chắc chắc muốn xóa combo ?" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grayLine" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="4dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Xác nhận"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp"
+            android:background="@color/white"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/grayLine" />
+
+        <Button
+            android:id="@+id/btn_close"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Đóng"
+            android:textAllCaps="false"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            android:background="@color/white"/>
+
+    </LinearLayout>
+
+</LinearLayout>

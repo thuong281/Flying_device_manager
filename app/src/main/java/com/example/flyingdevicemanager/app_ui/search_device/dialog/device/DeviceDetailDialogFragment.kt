@@ -1,9 +1,11 @@
-package com.example.flyingdevicemanager.app_ui.search_device.dialog
+package com.example.flyingdevicemanager.app_ui.search_device.dialog.device
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.flyingdevicemanager.R
 import com.example.flyingdevicemanager.app_ui.search_device.SearchViewModel
 import com.example.flyingdevicemanager.databinding.FragmentDeviceDetailDialogBinding
 import com.example.flyingdevicemanager.models.Device2
@@ -52,6 +54,21 @@ class DeviceDetailDialogFragment(private val deviceId: String) :
                 }
             }
         }
+        
+        lifecycleScope.launchWhenCreated {
+            viewModel.deleteDeviceResponse.collectLatest {
+                when (it.code()) {
+                    200 -> {
+                        Toast.makeText(context, it.body()?.msg, Toast.LENGTH_SHORT).show()
+                        closeCallBack?.invoke()
+                        dismiss()
+                    }
+                    else -> {
+                        errorMessage(it)
+                    }
+                }
+            }
+        }
     }
     
     private fun bindData(data: Device2) {
@@ -62,7 +79,8 @@ class DeviceDetailDialogFragment(private val deviceId: String) :
         binding.createdDate.text = data.createdDate?.let { TimeUtils.convertMillisToDateDetail(it) }
         binding.createdUser.text = data.createdUser
         if (data.createdDate != data.lastUpdated) {
-            binding.lastUpdate.text = data.lastUpdated?.let { TimeUtils.convertMillisToDateDetail(it) }
+            binding.lastUpdate.text =
+                data.lastUpdated?.let { TimeUtils.convertMillisToDateDetail(it) }
             binding.updateUser.text = data.updatedUser
         }
         
@@ -80,10 +98,28 @@ class DeviceDetailDialogFragment(private val deviceId: String) :
         binding.update.setOnClickListener {
             if (currentDevice == null) return@setOnClickListener
             val dialog = UpdateDeviceDialogFragment(currentDevice!!)
-            dialog.updateSuccessCallback  = {
+            dialog.updateSuccessCallback = {
                 loadData()
             }
             showDialog(dialog)
+        }
+        
+        binding.delete.setOnClickListener {
+            
+            val confirmDialog = BaseConfirmDialog(
+                context!!,
+                R.style.Theme_Confirm_Dialog
+            )
+            confirmDialog.setTitle("Warning")
+                .setDialogMessage("Do you really want to remove this device")
+                .setDialogConfirmText("Confirm")
+                .setDialogCloseText("Close")
+                .show()
+            
+            confirmDialog.setOnConfirmDialogListener {
+                viewModel.deleteDevice(getToken().toString(), deviceId)
+                confirmDialog.dismiss()
+            }
         }
     }
     

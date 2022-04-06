@@ -22,11 +22,23 @@ class SearchViewModel : ViewModel() {
     
     val updateDeviceResponse: MutableSharedFlow<Response<BaseResponse<Any>>> = MutableSharedFlow()
     
+    val deleteDeviceResponse: MutableSharedFlow<Response<BaseResponse<Any>>> = MutableSharedFlow()
+    
+    val getRegisterByIdResponse: MutableSharedFlow<Response<BaseResponse<Register>>> = MutableSharedFlow()
+    
+    val getListDevicesResponse: MutableSharedFlow<Response<BaseResponse<List<Device2>>>> = MutableSharedFlow()
+    
+    val updateRegisterResponse: MutableSharedFlow<Response<BaseResponse<Any>>> = MutableSharedFlow()
+    
     val loading: MutableLiveData<Boolean> = MutableLiveData()
     
     val deviceDetailLoading: MutableLiveData<Boolean> = MutableLiveData()
     
+    val registerDetailLoading: MutableLiveData<Boolean> = MutableLiveData()
+    
     val updateDeviceLoading: MutableLiveData<Boolean> = MutableLiveData()
+    
+    val updateRegisterLoading: MutableLiveData<Boolean> = MutableLiveData()
     
     fun searchDevice(token: String, word: String) {
         loading.postValue(true)
@@ -67,6 +79,42 @@ class SearchViewModel : ViewModel() {
             )
             updateDeviceResponse.emit(response)
             updateDeviceLoading.postValue(false)
+        }
+    }
+    
+    fun deleteDevice(token: String, deviceId: String) {
+        deviceDetailLoading.postValue(true)
+        viewModelScope.launch {
+            val response = repository.deleteDevice(token, deviceId)
+            deleteDeviceResponse.emit(response)
+            deviceDetailLoading.postValue(false)
+        }
+    }
+    
+    fun getRegisterById(token: String, id: String) {
+        registerDetailLoading.postValue(true)
+        viewModelScope.launch {
+            val response = repository.getRegister(token, id)
+            getRegisterByIdResponse.emit(response)
+            registerDetailLoading.postValue(false)
+        }
+    }
+    
+    fun getListDevices(token: String, id: String) {
+        registerDetailLoading.postValue(true)
+        viewModelScope.launch {
+            val response = repository.getListDevices(token, id)
+            getListDevicesResponse.emit(response)
+            registerDetailLoading.postValue(false)
+        }
+    }
+    
+    fun updateRegister(token: String, registerId: String, name: String, nationalId: String, phoneNumber: String) {
+        updateRegisterLoading.postValue(true)
+        viewModelScope.launch {
+            val response = repository.updateRegister(token, registerId, name, nationalId, phoneNumber)
+            updateRegisterResponse.emit(response)
+            updateRegisterLoading.postValue(false)
         }
     }
 }

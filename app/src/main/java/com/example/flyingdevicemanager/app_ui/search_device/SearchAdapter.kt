@@ -1,5 +1,6 @@
 package com.example.flyingdevicemanager.app_ui.search_device
 
+import android.annotation.SuppressLint
 import android.view.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flyingdevicemanager.R
@@ -21,8 +22,11 @@ class SearchAdapter(private val listener: ClickListener) : RecyclerView.Adapter<
     
     class RegisterViewHolder(private val binding: RegisterItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        val item = binding.item
+        
+        @SuppressLint("SetTextI18n")
         fun bind(register: Register) {
-            binding.registerName.text = "${register.name}  - ${register.deviceCount} device"
+            binding.registerName.text = "${register.name}  - ${register.listDeviceId?.size} device"
             binding.registerNationalId.text = "National ID: ${register.nationalId}"
             binding.registerPhoneNumber.text = "Phone number: ${register.phoneNumber}"
         }
@@ -77,6 +81,10 @@ class SearchAdapter(private val listener: ClickListener) : RecyclerView.Adapter<
             }
             is RegisterViewHolder -> {
                 holder.bind(items[position] as Register)
+                val register = items[position] as Register
+                holder.item.setOnClickListener {
+                    listener.onRegisterClick(register.id.toString())
+                }
             }
         }
     }
@@ -85,6 +93,6 @@ class SearchAdapter(private val listener: ClickListener) : RecyclerView.Adapter<
     
     interface ClickListener{
         fun onDeviceClick(id: String)
-        fun onRegisterClick(register: Register)
+        fun onRegisterClick(id: String)
     }
 }

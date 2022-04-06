@@ -6,7 +6,8 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.flyingdevicemanager.app_ui.search_device.dialog.DeviceDetailDialogFragment
+import com.example.flyingdevicemanager.app_ui.search_device.dialog.device.DeviceDetailDialogFragment
+import com.example.flyingdevicemanager.app_ui.search_device.dialog.register.RegisterDetailDialogFragment
 import com.example.flyingdevicemanager.databinding.FragmentSearchBinding
 import com.example.flyingdevicemanager.models.*
 import com.example.flyingdevicemanager.util.base.*
@@ -118,7 +119,14 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(
         showDialog(dialog)
     }
     
-    override fun onRegisterClick(register: Register) {
-        TODO("Not yet implemented")
+    override fun onRegisterClick(id: String) {
+        val dialog = RegisterDetailDialogFragment(id)
+        dialog.closeCallBack = {
+            when (searchType) {
+                SearchType.DEVICE -> viewModel.searchDevice(getToken().toString(), searchPhrase)
+                SearchType.REGISTER -> viewModel.searchRegister(getToken().toString(), searchPhrase)
+            }
+        }
+        showDialog(dialog)
     }
 }
