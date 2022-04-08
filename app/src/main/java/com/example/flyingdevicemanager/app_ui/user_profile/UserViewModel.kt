@@ -30,6 +30,8 @@ class UserViewModel : ViewModel() {
     
     val rejectUserKycResponse: MutableSharedFlow<Response<BaseResponse<Any>>> = MutableSharedFlow()
     
+    val createUserResponse: MutableSharedFlow<Response<BaseResponse<User>>> = MutableSharedFlow()
+    
     val loading: MutableLiveData<Boolean> = MutableLiveData()
     
     val updateAvatarLoading: MutableLiveData<Boolean> = MutableLiveData()
@@ -96,6 +98,20 @@ class UserViewModel : ViewModel() {
     
     fun getUserKycList(token: String) {
         pagingFlow = repository.getAllUserKycPaging(token).cachedIn(viewModelScope)
+    }
+    
+    fun createUser(email: String, userName: String, password: String) {
+        viewModelScope.launch {
+            val response = repository.signUp(email, userName, password)
+            createUserResponse.emit(response)
+        }
+    }
+    
+    fun createAdmin(email: String, userName: String, password: String) {
+        viewModelScope.launch {
+            val response = repository.signUpAdmin(email, userName, password)
+            createUserResponse.emit(response)
+        }
     }
     
 }

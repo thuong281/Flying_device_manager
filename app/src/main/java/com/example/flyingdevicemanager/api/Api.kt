@@ -25,7 +25,16 @@ interface Api {
         @Field("email") email: String,
         @Field("name") name: String,
         @Field("password") password: String
-    ): Response<User>
+    ): Response<BaseResponse<User>>
+    
+    // add admin account
+    @POST("register-admin")
+    @FormUrlEncoded
+    suspend fun signupAdmin(
+        @Field("email") email: String,
+        @Field("name") name: String,
+        @Field("password") password: String
+    ): Response<BaseResponse<User>>
     
     // request kyc
     @POST("api/user/upload-kyc")
@@ -224,6 +233,13 @@ interface Api {
         @Query("id") id: String
     ): Response<BaseResponse<Register>>
     
+    // get single register by nationalId
+    @GET("/api/register/national-id")
+    suspend fun getRegisterByNationalId(
+        @Header("auth-token") token: String,
+        @Query("id") id: String
+    ): Response<BaseResponse<Register>>
+    
     // get list device of register
     @GET("/api/register/devices")
     suspend fun getListDevices(
@@ -248,4 +264,10 @@ interface Api {
         @Header("auth-token") token: String,
         @Path("id") registerId: String
     ): Response<BaseResponse<Any>>
+    
+    // count devices
+    @GET("/api/device/count")
+    suspend fun countSummary(
+        @Header("auth-token") token: String,
+    ): Response<BaseResponse<CountSummary>>
 }

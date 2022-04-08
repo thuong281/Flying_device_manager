@@ -19,8 +19,10 @@
         <entry key="app/src/main/res/drawable/ic_online.xml" value="0.165625" />
         <entry key="app/src/main/res/drawable/ic_pos.xml" value="0.26875" />
         <entry key="app/src/main/res/drawable/navigation_view_colored.xml" value="0.26875" />
+        <entry key="app/src/main/res/drawable/oval_bg.xml" value="0.1640625" />
         <entry key="app/src/main/res/drawable/round_backgroud.xml" value="0.26875" />
         <entry key="app/src/main/res/drawable/searchview_backgroud.xml" value="0.26875" />
+        <entry key="app/src/main/res/drawable/test.xml" value="0.1640625" />
         <entry key="app/src/main/res/drawable/user_item.xml" value="0.1703125" />
         <entry key="app/src/main/res/layout-v23/fragment_device_detail_dialog.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.1265625" />
@@ -35,6 +37,8 @@
         <entry key="app/src/main/res/layout/fragment_add_device.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_add_device2.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/fragment_avatar.xml" value="0.2526041666666667" />
+        <entry key="app/src/main/res/layout/fragment_create_user.xml" value="0.2526041666666667" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_device.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/fragment_device_detail_dialog.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_history.xml" value="0.21" />

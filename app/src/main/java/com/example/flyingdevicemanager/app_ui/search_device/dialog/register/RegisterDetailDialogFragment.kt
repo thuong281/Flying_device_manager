@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.collectLatest
 import retrofit2.Response
 
 
-class RegisterDetailDialogFragment(private val registerId: String) :
+class RegisterDetailDialogFragment(private val registerId: String, private val isOpenFromDevice: Boolean = false) :
     BaseDialogFragment<FragmentRegisterDetailDialogBinding>(
         FragmentRegisterDetailDialogBinding::inflate
     ), SearchAdapter.ClickListener {
@@ -24,7 +24,7 @@ class RegisterDetailDialogFragment(private val registerId: String) :
     
     val adapter: SearchAdapter by lazy { SearchAdapter(this) }
     
-    var closeCallBack: (() -> Unit)? = null
+    var closeCallBack: (() -> Unit) = {}
     
     var currentRegister: Register? = null
     
@@ -142,6 +142,7 @@ class RegisterDetailDialogFragment(private val registerId: String) :
     }
     
     override fun onDeviceClick(id: String) {
+        if (isOpenFromDevice) return
         val dialog = DeviceDetailDialogFragment(id)
         dialog.closeCallBack = {
             loadData()

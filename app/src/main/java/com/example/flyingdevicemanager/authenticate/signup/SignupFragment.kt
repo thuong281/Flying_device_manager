@@ -40,12 +40,12 @@ class SignupFragment : Fragment() {
         binding.login.setOnClickListener {
             navController.navigate(R.id.action_signupFragment_to_loginFragment)
         }
-        binding.register.setOnClickListener {
-            val email = binding.emailText.text.toString()
-            val userName = binding.userNameText.toString()
-            val password = binding.passwordText.text.toString()
-            viewModel.signup(email, userName, password)
-        }
+//        binding.register.setOnClickListener {
+//            val email = binding.emailText.text.toString()
+//            val userName = binding.userNameText.toString()
+//            val password = binding.passwordText.text.toString()
+//            viewModel.signup(email, userName, password)
+//        }
     }
     
     private fun observeData() {

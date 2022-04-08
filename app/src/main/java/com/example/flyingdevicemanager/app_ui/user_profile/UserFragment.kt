@@ -7,6 +7,7 @@ import androidx.fragment.app.*
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.*
 import com.example.flyingdevicemanager.R
+import com.example.flyingdevicemanager.app_ui.user_profile.create_user.CreateUserFragment
 import com.example.flyingdevicemanager.app_ui.user_profile.dialog.AvatarFragment
 import com.example.flyingdevicemanager.app_ui.user_profile.review_user_kyc.ListUserKycFragment
 import com.example.flyingdevicemanager.app_ui.user_profile.user_kyc.UserKycFragment
@@ -71,9 +72,9 @@ class UserFragment : BaseFragment<FragmentUserBinding>(
                         user = it.body()!!.data
                         
                         if (user.isAdmin == "1") {
-                            binding.userKycReview.visibility = View.VISIBLE
+                            binding.createUserAccount.visibility = View.VISIBLE
                         } else {
-                            binding.userKycReview.visibility = View.GONE
+                            binding.createUserAccount.visibility = View.GONE
                         }
                     }
                     else -> {
@@ -108,8 +109,8 @@ class UserFragment : BaseFragment<FragmentUserBinding>(
             showDialog(UserKycFragment())
         }
         
-        binding.userKycReview.setOnClickListener {
-            showDialog(ListUserKycFragment())
+        binding.createUserAccount.setOnClickListener {
+            showDialog(CreateUserFragment())
         }
         
         binding.logout.setOnClickListener {

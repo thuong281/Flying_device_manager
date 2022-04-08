@@ -26,6 +26,8 @@ class SearchViewModel : ViewModel() {
     
     val getRegisterByIdResponse: MutableSharedFlow<Response<BaseResponse<Register>>> = MutableSharedFlow()
     
+    val getRegisterByNationalIdResponse: MutableSharedFlow<Response<BaseResponse<Register>>> = MutableSharedFlow()
+    
     val getListDevicesResponse: MutableSharedFlow<Response<BaseResponse<List<Device2>>>> = MutableSharedFlow()
     
     val updateRegisterResponse: MutableSharedFlow<Response<BaseResponse<Any>>> = MutableSharedFlow()
@@ -99,6 +101,15 @@ class SearchViewModel : ViewModel() {
             val response = repository.getRegister(token, id)
             getRegisterByIdResponse.emit(response)
             registerDetailLoading.postValue(false)
+        }
+    }
+    
+    fun getRegisterByNationalId(token: String, id: String) {
+        deviceDetailLoading.postValue(true)
+        viewModelScope.launch {
+            val response = repository.getRegisterByNationalId(token, id)
+            getRegisterByNationalIdResponse.emit(response)
+            deviceDetailLoading.postValue(false)
         }
     }
     

@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/dashboardFragment"
         android:enabled="true"
-        android:id="@+id/addDeviceFragment"
-        android:icon="@drawable/ic_baseline_add_24"
-        android:title="Add device" />
+        android:icon="@drawable/ic_baseline_dashboard_24"
+        android:title="Dashboard" />
     <item
-        android:enabled="true"
         android:id="@+id/searchFragment"
+        android:enabled="true"
         android:icon="@drawable/ic_baseline_search_24"
         android:title="Add device" />
     <item
-        android:enabled="true"
         android:id="@+id/deviceFragment"
+        android:enabled="true"
         android:icon="@drawable/ic_baseline_airplanemode_active_24"
         android:title="Device" />
     <item
-        android:enabled="true"
         android:id="@+id/userFollowFragment"
+        android:enabled="true"
         android:icon="@drawable/ic_baseline_connect_without_contact_24"
         android:title="Following" />
     <item
-        android:enabled="true"
         android:id="@+id/userFragment"
+        android:enabled="true"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="User Info" />
 </menu>

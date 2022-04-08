@@ -35,15 +35,15 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
     
-    fun signup(email: String, userName: String, password: String) {
-        viewModelScope.launch {
-            try {
-                val response = repository.signUp(email, userName, password)
-                signupResponse.value = response
-            } catch (e: ConnectException) {
-                Toast.makeText(getApplication(), "No internet connection", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        }
-    }
+//    fun signup(email: String, userName: String, password: String) {
+//        viewModelScope.launch {
+//            try {
+//                val response = repository.signUp(email, userName, password)
+//                signupResponse.value = response
+//            } catch (e: ConnectException) {
+//                Toast.makeText(getApplication(), "No internet connection", Toast.LENGTH_SHORT)
+//                    .show()
+//            }
+//        }
+//    }
 }

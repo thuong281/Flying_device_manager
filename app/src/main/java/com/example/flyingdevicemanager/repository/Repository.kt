@@ -16,8 +16,12 @@ class Repository {
         return RetrofitInstance.api.login(email, password)
     }
     
-    suspend fun signUp(email: String, userName: String, password: String): Response<User> {
+    suspend fun signUp(email: String, userName: String, password: String): Response<BaseResponse<User>> {
         return RetrofitInstance.api.signup(email, userName, password)
+    }
+    
+    suspend fun signUpAdmin(email: String, userName: String, password: String): Response<BaseResponse<User>> {
+        return RetrofitInstance.api.signupAdmin(email, userName, password)
     }
     
     suspend fun submitUserKyc(
@@ -168,6 +172,10 @@ class Repository {
         return RetrofitInstance.api.getRegister(token, id)
     }
     
+    suspend fun getRegisterByNationalId(token: String, id: String): Response<BaseResponse<Register>> {
+        return RetrofitInstance.api.getRegisterByNationalId(token, id)
+    }
+    
     suspend fun getListDevices(token: String, id: String): Response<BaseResponse<List<Device2>>> {
         return RetrofitInstance.api.getListDevices(token, id)
     }
@@ -180,5 +188,9 @@ class Repository {
     
     suspend fun deleteRegister(token: String, registerId: String): Response<BaseResponse<Any>> {
         return RetrofitInstance.api.deleteRegister(token, registerId)
+    }
+    
+    suspend fun getSummary(token: String): Response<BaseResponse<CountSummary>> {
+        return RetrofitInstance.api.countSummary(token)
     }
 }

@@ -74,7 +74,7 @@
             android:layout_height="1dp"
             android:layout_below="@id/info"
             android:layout_marginTop="8dp"
-            android:background="@drawable/round_backgroud" />
+            android:background="@drawable/round_background" />
 
     </RelativeLayout>
 
