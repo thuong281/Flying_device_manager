@@ -61,13 +61,13 @@ class CreateUserFragment : BaseDialogFragment<FragmentCreateUserBinding>(
         }
         
         binding.register.setOnClickListener {
-            val email = binding.emailText.text.toString()
-            val userName = binding.userNameText.toString()
+            val fullName = binding.fullNameText.text.toString()
+            val userName = binding.userNameText.text.toString()
             val password = binding.passwordText.text.toString()
             if (binding.checkBox.isChecked) {
-                viewModel.createAdmin(email, userName, password)
+                viewModel.createAdmin(userName, fullName, password)
             } else {
-                viewModel.createUser(email, userName, password)
+                viewModel.createUser(userName, fullName, password)
             }
             
         }

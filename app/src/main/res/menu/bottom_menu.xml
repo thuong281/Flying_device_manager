@@ -5,21 +5,28 @@
         android:enabled="true"
         android:icon="@drawable/ic_baseline_dashboard_24"
         android:title="Dashboard" />
+
+    <item
+        android:id="@+id/addDeviceFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_add_24"
+        android:title="Add device" />
+
     <item
         android:id="@+id/searchFragment"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_search_24"
-        android:title="Add device" />
-    <item
-        android:id="@+id/deviceFragment"
-        android:enabled="true"
-        android:icon="@drawable/ic_baseline_airplanemode_active_24"
-        android:title="Device" />
-    <item
-        android:id="@+id/userFollowFragment"
-        android:enabled="true"
-        android:icon="@drawable/ic_baseline_connect_without_contact_24"
-        android:title="Following" />
+        android:title="Search" />
+<!--    <item-->
+<!--        android:id="@+id/deviceFragment"-->
+<!--        android:enabled="true"-->
+<!--        android:icon="@drawable/ic_baseline_airplanemode_active_24"-->
+<!--        android:title="Device" />-->
+<!--    <item-->
+<!--        android:id="@+id/userFollowFragment"-->
+<!--        android:enabled="true"-->
+<!--        android:icon="@drawable/ic_baseline_connect_without_contact_24"-->
+<!--        android:title="Following" />-->
     <item
         android:id="@+id/userFragment"
         android:enabled="true"

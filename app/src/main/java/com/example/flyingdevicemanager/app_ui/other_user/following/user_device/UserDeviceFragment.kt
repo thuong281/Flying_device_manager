@@ -110,7 +110,7 @@ class UserDeviceFragment(private val user: User) : DialogFragment(), DeviceAdapt
     
     @SuppressLint("SetTextI18n")
     private fun bindData() {
-        binding.txtTitle.text = "${user.email} 's devices"
+        binding.txtTitle.text = "${user.userName} 's devices"
     }
     
     private fun getToken(): String? {

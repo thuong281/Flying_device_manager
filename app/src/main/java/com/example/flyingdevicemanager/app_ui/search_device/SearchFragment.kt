@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.flyingdevicemanager.R
 import com.example.flyingdevicemanager.app_ui.search_device.dialog.device.DeviceDetailDialogFragment
 import com.example.flyingdevicemanager.app_ui.search_device.dialog.register.RegisterDetailDialogFragment
 import com.example.flyingdevicemanager.databinding.FragmentSearchBinding
@@ -97,14 +98,19 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(
             }
         })
         
-        binding.radioDevice.setOnClickListener {
-            searchType = SearchType.DEVICE
-            binding.search.queryHint = "Search device"
-        }
-        
-        binding.radioRegister.setOnClickListener {
-            searchType = SearchType.REGISTER
-            binding.search.queryHint = "Search register"
+        binding.radioGroup.setOnCheckedChangeListener { _, optionId ->
+            kotlin.run {
+                when(optionId) {
+                    R.id.radio_device -> {
+                        searchType = SearchType.DEVICE
+                        binding.search.queryHint = "Search device"
+                    }
+                    R.id.radio_register -> {
+                        searchType = SearchType.REGISTER
+                        binding.search.queryHint = "Search register"
+                    }
+                }
+            }
         }
     }
     

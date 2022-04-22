@@ -51,6 +51,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    
+        supportActionBar?.hide()
         
         sharedPreferences = applicationContext.getSharedPreferences(
             "SHARED_PREF",
@@ -71,16 +73,23 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 //        mMap.mapType = GoogleMap.MAP_TYPE_HYBRID
         initSocket()
         observeData()
+        handleAction()
+    }
+    
+    private fun handleAction() {
+        binding.btnBack.setOnClickListener {
+            super.onBackPressed()
+        }
     }
     
     private fun initSocket() {
-        val userId = args.deviceId
-        
-        viewModel.getDeviceLocation(getToken().toString(), userId.toString())
+        val deviceId = args.deviceId
+        viewModel.getDeviceLocation(getToken().toString(), deviceId)
+        viewModel.getDeviceById(getToken().toString(), deviceId)
         
         // init socket listener
         socket.connect()
-        socket.on("update_device_${userId}") { array ->
+        socket.on("update_device_${deviceId}") { array ->
             lifecycleScope.launch {
                 val data: JSONObject = JSONObject(array[0].toString())
                 val lat = data.getDouble("lat")
@@ -99,6 +108,19 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                             it.body()?.data?.lat!!,
                             it.body()?.data?.long!!
                         )
+                    }
+                    else -> {
+                        errorMessage(it as Response<BaseResponse<Any>>)
+                    }
+                }
+            }
+        }
+        
+        lifecycleScope.launchWhenCreated {
+            viewModel.getDeviceByIdResponse.collectLatest {
+                when (it.code()) {
+                    200 -> {
+                        binding.txtTitle.text = it.body()?.data?.devicePlate ?: ""
                     }
                     else -> {
                         errorMessage(it as Response<BaseResponse<Any>>)

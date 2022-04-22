@@ -32,8 +32,14 @@ class SearchAdapter(private val listener: ClickListener) :
         @SuppressLint("SetTextI18n")
         fun bind(register: Register) {
             binding.registerName.text = "${register.name}  - ${register.listDeviceId?.size} device"
-            binding.registerNationalId.text = "National ID: ${register.nationalId}"
+            binding.registerNationalId.text = "Organization ID: ${register.registerId}"
             binding.registerPhoneNumber.text = "Phone number: ${register.phoneNumber}"
+            if (register.isOrganization == 0) {
+                binding.avatar.setImageResource(R.drawable.ic_baseline_person_24)
+            } else {
+                binding.avatar.setImageResource(R.drawable.ic_baseline_home_work_24)
+                binding.imageContainer.radius = 0f
+            }
         }
     }
     

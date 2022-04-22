@@ -2,9 +2,10 @@ package com.example.flyingdevicemanager.app_ui.add_device.add
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.flyingdevicemanager.R
 import com.example.flyingdevicemanager.app_ui.add_device.AddDeviceViewModel
 import com.example.flyingdevicemanager.databinding.FragmentAddBinding
 import com.example.flyingdevicemanager.util.TimeUtils
@@ -19,14 +20,49 @@ class AddFragment : BaseFragment<FragmentAddBinding>(
     
     var callback: Callback? = null
     
+    private val registerType = arrayOf("Person", "Organization")
+    
+    private var isOrganization = 0;
+    
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         handleAction()
         observeData()
+        initSpinner()
+    }
+    
+    private fun initSpinner() {
+        val spinnerAdapter = ArrayAdapter(context!!, R.layout.support_simple_spinner_dropdown_item, registerType)
+        spinnerAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
+        binding.spinner.adapter = spinnerAdapter
+        
+        binding.spinner.onItemSelectedListener = object :AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                if (p0?.id == R.id.spinner) {
+                    isOrganization = p2
+                    changeRegisterType(isOrganization)
+                }
+            }
+    
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+    
+        }
+    }
+    
+    fun changeRegisterType(isOrganization: Int) {
+        if (isOrganization == 1) {
+            binding.registerName.hint = "Organization name"
+            binding.registerNationalId.hint = "Organization id"
+            binding.registerPhone.hint = "Organization phone number"
+        } else {
+            binding.registerName.hint = "Register name"
+            binding.registerNationalId.hint = "Register national id"
+            binding.registerPhone.hint = "Register phone number"
+        }
     }
     
     private fun handleAction() {
-        binding.deviceBuyDate.setOnClickListener {
+        binding.datePicker.setOnClickListener {
             val datePicker =
                 MaterialDatePicker.Builder.datePicker()
                     .setTitleText("Select date")
@@ -43,6 +79,7 @@ class AddFragment : BaseFragment<FragmentAddBinding>(
         binding.submitAdd.setOnClickListener {
             viewModel.addDevice(
                 getToken().toString(),
+                isOrganization,
                 binding.registerNameText.text.toString(),
                 binding.registerNationalIdText.text.toString(),
                 binding.registerPhoneText.text.toString(),
@@ -79,7 +116,7 @@ class AddFragment : BaseFragment<FragmentAddBinding>(
         }
     }
     
-    fun clearTextInput() {
+    private fun clearTextInput() {
         binding.registerNameText.text!!.clear()
         binding.registerNationalIdText.text!!.clear()
         binding.registerPhoneText.text!!.clear()

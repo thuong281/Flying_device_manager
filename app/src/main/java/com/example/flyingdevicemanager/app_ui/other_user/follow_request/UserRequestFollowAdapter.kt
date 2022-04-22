@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.view.*
 import androidx.recyclerview.widget.RecyclerView
 import com.chauthai.swipereveallayout.ViewBinderHelper
-import com.example.flyingdevicemanager.app_ui.device.DeviceAdapter
 import com.example.flyingdevicemanager.databinding.*
 import com.example.flyingdevicemanager.models.*
 import com.squareup.picasso.Picasso
@@ -28,7 +27,7 @@ class UserRequestFollowAdapter(private val listener: ClickListener): RecyclerVie
         
         @SuppressLint("SetTextI18n")
         fun bind(user: User) {
-            binding.userEmail.text = "Email: ${user.email}"
+            binding.userEmail.text = "Email: ${user.userName}"
             binding.userName.text = "User name: ${user.name}"
             if (user.avatar != null && user.avatar != "") {
                 Picasso.get().load(user.avatar).fit().centerCrop().into(binding.avatar)

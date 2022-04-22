@@ -3,15 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../.gradle/caches/transforms-3/cda44456923fd11cbd4ab0cf1b1fc14c/transformed/appcompat-1.4.1/res/layout/support_simple_spinner_dropdown_item.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/drawable/add_device_history_item.xml" value="0.26875" />
         <entry key="app/src/main/res/drawable/bg_green_corner_top_left_right.xml" value="0.26875" />
         <entry key="app/src/main/res/drawable/bg_white_round_radius_10dp.xml" value="0.26875" />
+        <entry key="app/src/main/res/drawable/border_black.xml" value="0.26875" />
         <entry key="app/src/main/res/drawable/border_green.xml" value="0.26875" />
         <entry key="app/src/main/res/drawable/bottom_sheet_background.xml" value="0.26875" />
         <entry key="app/src/main/res/drawable/drone_img.xml" value="0.1640625" />
         <entry key="app/src/main/res/drawable/ic_airplane_flight.xml" value="0.165625" />
         <entry key="app/src/main/res/drawable/ic_baseline_airplanemode_active_24.xml" value="0.26461538461538464" />
         <entry key="app/src/main/res/drawable/ic_baseline_calendar_month_24.xml" value="0.26875" />
+        <entry key="app/src/main/res/drawable/ic_baseline_home_work_24.xml" value="0.26875" />
         <entry key="app/src/main/res/drawable/ic_baseline_monetization_on_24.xml" value="0.26875" />
         <entry key="app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.26875" />
         <entry key="app/src/main/res/drawable/ic_baseline_refresh_24.xml" value="0.13385416666666666" />
@@ -27,15 +30,18 @@
         <entry key="app/src/main/res/layout-v23/fragment_device_detail_dialog.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.1265625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/activity_maps.xml" value="0.12604166666666666" />
+        <entry key="app/src/main/res/layout/activity_maps.xml" value="0.2" />
         <entry key="app/src/main/res/layout/add_device_history_item.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/bottom_dialog.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/confirm_dialog.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/device_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/device_item_2.xml" value="0.2526041666666667" />
+        <entry key="app/src/main/res/layout/fragment_active_device.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/fragment_add.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/fragment_add_device.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_add_device2.xml" value="0.2526041666666667" />
+        <entry key="app/src/main/res/layout/fragment_all_device.xml" value="0.2526041666666667" />
+        <entry key="app/src/main/res/layout/fragment_all_register.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/fragment_avatar.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/fragment_create_user.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.18" />

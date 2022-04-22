@@ -48,7 +48,7 @@ class UserViewModel : ViewModel() {
             loading.postValue(false)
         }
     }
-    
+
     fun changeAvatar(token: String, image: MultipartBody.Part) {
         viewModelScope.launch {
             updateAvatarLoading.postValue(true)
@@ -95,21 +95,21 @@ class UserViewModel : ViewModel() {
     }
     
     var pagingFlow: LiveData<PagingData<User>> = MutableLiveData()
-    
+
     fun getUserKycList(token: String) {
         pagingFlow = repository.getAllUserKycPaging(token).cachedIn(viewModelScope)
     }
     
-    fun createUser(email: String, userName: String, password: String) {
+    fun createUser(userName: String, fullName: String, password: String) {
         viewModelScope.launch {
-            val response = repository.signUp(email, userName, password)
+            val response = repository.signUp(userName, fullName, password)
             createUserResponse.emit(response)
         }
     }
     
-    fun createAdmin(email: String, userName: String, password: String) {
+    fun createAdmin(userName: String, fullName: String, password: String) {
         viewModelScope.launch {
-            val response = repository.signUpAdmin(email, userName, password)
+            val response = repository.signUpAdmin(userName, fullName, password)
             createUserResponse.emit(response)
         }
     }

@@ -75,9 +75,9 @@ class LoginFragment : Fragment() {
     
     private fun handleAction() {
         binding.login.setOnClickListener {
-            val email = binding.userNameText.text.toString()
+            val userName = binding.userNameText.text.toString()
             val password = binding.passwordText.text.toString()
-            viewModel.login(email = email, password = password)
+            viewModel.login(userName = userName, password = password)
         }
         binding.register.setOnClickListener {
             navController.navigate(R.id.action_loginFragment_to_signupFragment)

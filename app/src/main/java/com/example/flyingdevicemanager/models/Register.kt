@@ -8,9 +8,11 @@ data class Register(
     @SerializedName("name")
     val name: String? = "",
     @SerializedName("nationalId")
-    val nationalId: String? = "",
+    val registerId: String? = "",
     @SerializedName("phoneNumber")
     val phoneNumber: String? = "",
     @SerializedName("listDeviceId")
     val listDeviceId: List<String>? = ArrayList(),
+    @SerializedName("isOrganization")
+    val isOrganization: Int?
 )

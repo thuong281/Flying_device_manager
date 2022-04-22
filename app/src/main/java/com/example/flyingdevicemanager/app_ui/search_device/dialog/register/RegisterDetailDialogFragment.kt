@@ -1,5 +1,6 @@
 package com.example.flyingdevicemanager.app_ui.search_device.dialog.register
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -93,9 +94,19 @@ class RegisterDetailDialogFragment(private val registerId: String, private val i
         }
     }
     
+    @SuppressLint("SetTextI18n")
     private fun bindData(data: Register) {
+        if (data.isOrganization == 1) {
+            binding.nameTitle.text = "Organization name: "
+            binding.idTitle.text = "Organization ID: "
+            binding.nameIcon.setImageResource(R.drawable.ic_baseline_home_work_24)
+        } else {
+            binding.nameTitle.text = "Register name: "
+            binding.idTitle.text = "Citizen card: "
+            binding.nameIcon.setImageResource(R.drawable.ic_baseline_person_24)
+        }
         binding.registerName.text = data.name
-        binding.citizenCard.text = data.nationalId
+        binding.citizenCard.text = data.registerId
         binding.phoneNumber.text = data.phoneNumber
     }
     

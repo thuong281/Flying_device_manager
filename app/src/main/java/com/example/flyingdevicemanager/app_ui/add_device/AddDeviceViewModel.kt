@@ -21,13 +21,14 @@ class AddDeviceViewModel : ViewModel() {
     val loadingAddDeviceHistory: MutableLiveData<Boolean> = MutableLiveData()
     
     fun addDevice(
-        token: String, registerName: String, registerNationalId: String, registerPhone: String,
+        token: String,isOrganization: Int, registerName: String, registerNationalId: String, registerPhone: String,
         devicePlate: String, deviceColor: String, deviceManufacturer: String, deviceBuyDate: String
     ) {
         viewModelScope.launch {
             loadingAddDevice.postValue(true)
             val response = repository.insertNewDevice(
                 token,
+                isOrganization,
                 registerName,
                 registerNationalId,
                 registerPhone,

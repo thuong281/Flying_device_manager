@@ -15,6 +15,7 @@ class TabAdapter(fragmentActivity: FragmentActivity, private val callback: AddFr
                 fragment.callback = callback
                 fragment
             }
+            1 -> HistoryFragment()
             else -> HistoryFragment()
         }
     }

@@ -19,10 +19,10 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
     
     val signupResponse: MutableLiveData<Response<User>> = MutableLiveData()
     
-    fun login(email: String, password: String) {
+    fun login(userName: String, password: String) {
         viewModelScope.launch {
             try {
-                val response = repository.login(email, password)
+                val response = repository.login(userName, password)
                 loginResponse.value = response
             } catch (e: ConnectException) {
                 Toast.makeText(getApplication(), "No internet connection", Toast.LENGTH_SHORT)

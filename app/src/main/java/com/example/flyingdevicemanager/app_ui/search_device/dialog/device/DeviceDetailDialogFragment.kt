@@ -9,7 +9,6 @@ import androidx.lifecycle.lifecycleScope
 import com.example.flyingdevicemanager.R
 import com.example.flyingdevicemanager.app_ui.map.MapsActivity
 import com.example.flyingdevicemanager.app_ui.search_device.*
-import com.example.flyingdevicemanager.app_ui.search_device.dialog.register.RegisterDetailDialogFragment
 import com.example.flyingdevicemanager.databinding.FragmentDeviceDetailDialogBinding
 import com.example.flyingdevicemanager.models.*
 import com.example.flyingdevicemanager.util.TimeUtils
@@ -72,7 +71,7 @@ class DeviceDetailDialogFragment(
                     200 -> {
                         currentRegister = it.body()?.data
                         binding.registerName.text = currentRegister?.name
-                        binding.citizenCard.text = currentRegister?.nationalId
+                        binding.citizenCard.text = currentRegister?.registerId
                     }
                     else -> errorMessage(it as Response<BaseResponse<Any>>)
                 }

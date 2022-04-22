@@ -1,9 +1,7 @@
 package com.example.flyingdevicemanager.app_ui.search_device.dialog.register
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.*
 import androidx.lifecycle.lifecycleScope
@@ -78,7 +76,7 @@ class UpdateRegisterDialogFragment(private val previousRegister: Register) : Bas
     
     private fun compareData(): Boolean {
         return (binding.nameText.text.toString() == previousRegister.name &&
-                binding.citizenCardText.text.toString() == previousRegister.nationalId &&
+                binding.citizenCardText.text.toString() == previousRegister.registerId &&
                 binding.phoneNumberText.text.toString() == previousRegister.phoneNumber)
     }
     
@@ -94,7 +92,7 @@ class UpdateRegisterDialogFragment(private val previousRegister: Register) : Bas
     
     private fun bindData() {
         binding.nameText.setText(previousRegister.name)
-        binding.citizenCardText.setText(previousRegister.nationalId)
+        binding.citizenCardText.setText(previousRegister.registerId)
         binding.phoneNumberText.setText(previousRegister.phoneNumber)
     }
     

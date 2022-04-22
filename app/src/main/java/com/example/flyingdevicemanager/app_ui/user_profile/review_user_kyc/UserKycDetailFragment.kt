@@ -115,7 +115,7 @@ class UserKycDetailFragment(private val user: User, private val position: Int) :
         if (user.avatar != null && user.avatar != "") {
             Picasso.get().load(user.avatar).fit().centerCrop().into(binding.avatar)
         }
-        binding.userEmail.text = user.email
+        binding.userEmail.text = user.userName
         binding.userName.text = user.name
     }
     

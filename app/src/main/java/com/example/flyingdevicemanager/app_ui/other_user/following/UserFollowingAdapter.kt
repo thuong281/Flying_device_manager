@@ -22,7 +22,7 @@ class UserFollowingAdapter(private val listener: ClickListener) : RecyclerView.A
         
         @SuppressLint("SetTextI18n")
         fun bind(user: User) {
-            binding.userEmail.text = "Email: ${user.email}"
+            binding.userEmail.text = "Email: ${user.userName}"
             binding.userName.text = "User name: ${user.name}"
             binding.status.visibility = View.GONE
             if (user.avatar != null && user.avatar != "") {

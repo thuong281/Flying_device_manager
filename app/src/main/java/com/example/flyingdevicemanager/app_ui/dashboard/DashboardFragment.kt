@@ -2,8 +2,10 @@ package com.example.flyingdevicemanager.app_ui.dashboard
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.flyingdevicemanager.app_ui.dashboard.dialog.*
 import com.example.flyingdevicemanager.databinding.FragmentDashboardBinding
 import com.example.flyingdevicemanager.models.CountSummary
 import com.example.flyingdevicemanager.util.base.*
@@ -15,6 +17,8 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>(
 ) {
     
     private val viewModel: DashBoardViewModel by activityViewModels()
+    
+    private var data: CountSummary? = null
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,7 +39,10 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>(
         lifecycleScope.launchWhenCreated {
             viewModel.getSummaryResponse.collectLatest {
                 when (it.code()) {
-                    200 -> it.body()?.let { it1 -> bindData(it1.data) }
+                    200 -> {
+                        data = it.body()?.data
+                        it.body()?.let { it1 -> bindData(it1.data) }
+                    }
                     else -> errorMessage(it as Response<BaseResponse<Any>>)
                 }
             }
@@ -46,7 +53,12 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>(
         binding.totalDevice.text = data.devices.toString()
         binding.totalRegister.text = data.registers.toString()
         binding.countActiveDevice.text = data.activeDevices.toString()
-        binding.activePercent.percent = (data.activeDevices!!.toFloat() / data.devices!!.toFloat())
+        if (data.devices!! == 0) {
+            binding.activePercent.percent = 0f
+        } else {
+            binding.activePercent.percent =
+                100 * (data.activeDevices!!.toFloat() / data.devices!!.toFloat())
+        }
     }
     
     private fun loadData() {
@@ -56,6 +68,33 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>(
     private fun handleAction() {
         binding.btnRefresh.setOnClickListener {
             loadData()
+        }
+        
+        binding.activePercent.setOnClickListener {
+            if (data == null) return@setOnClickListener
+            if (data!!.activeDevices == 0) {
+                Toast.makeText(context, "There is no active device", Toast.LENGTH_SHORT).show()
+            } else {
+                showDialog(ActiveDeviceFragment())
+            }
+        }
+    
+        binding.device.setOnClickListener {
+            if (data == null) return@setOnClickListener
+            if (data!!.devices == 0) {
+                Toast.makeText(context, "There is no device", Toast.LENGTH_SHORT).show()
+            } else {
+                showDialog(AllDeviceFragment())
+            }
+        }
+    
+        binding.register.setOnClickListener {
+            if (data == null) return@setOnClickListener
+            if (data!!.registers == 0) {
+                Toast.makeText(context, "There is no register", Toast.LENGTH_SHORT).show()
+            } else {
+                showDialog(AllRegisterFragment())
+            }
         }
     }
     

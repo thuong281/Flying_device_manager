@@ -9,7 +9,6 @@ import androidx.navigation.*
 import com.example.flyingdevicemanager.R
 import com.example.flyingdevicemanager.app_ui.user_profile.create_user.CreateUserFragment
 import com.example.flyingdevicemanager.app_ui.user_profile.dialog.AvatarFragment
-import com.example.flyingdevicemanager.app_ui.user_profile.review_user_kyc.ListUserKycFragment
 import com.example.flyingdevicemanager.app_ui.user_profile.user_kyc.UserKycFragment
 import com.example.flyingdevicemanager.databinding.*
 import com.example.flyingdevicemanager.models.User
@@ -96,7 +95,7 @@ class UserFragment : BaseFragment<FragmentUserBinding>(
         if (user.avatar != null && user.avatar != "") {
             Picasso.get().load(user.avatar).fit().centerCrop().into(binding.avatar)
         }
-        binding.userEmail.text = user.email
+        binding.userEmail.text = user.userName
         binding.userName.text = user.name
     }
     

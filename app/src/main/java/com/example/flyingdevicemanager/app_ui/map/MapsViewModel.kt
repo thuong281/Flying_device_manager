@@ -13,10 +13,20 @@ class MapsViewModel : ViewModel() {
     
     val locationResponse: MutableSharedFlow<Response<BaseResponse<Location>>> = MutableSharedFlow()
     
+    val getDeviceByIdResponse: MutableSharedFlow<Response<BaseResponse<Device2>>> =
+        MutableSharedFlow()
+    
     fun getDeviceLocation(token: String, deviceId: String) {
         viewModelScope.launch {
             val response = repository.getDeviceLocation(token, deviceId)
             locationResponse.emit(response)
+        }
+    }
+    
+    fun getDeviceById(token: String, id: String) {
+        viewModelScope.launch {
+            val response = repository.getDeviceById(token, id)
+            getDeviceByIdResponse.emit(response)
         }
     }
 }

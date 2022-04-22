@@ -14,7 +14,7 @@ interface Api {
     @POST("login")
     @FormUrlEncoded
     suspend fun login(
-        @Field("email") email: String,
+        @Field("user_name") userName: String,
         @Field("password") password: String
     ): Response<BaseResponse<UserToken>>
     
@@ -22,7 +22,7 @@ interface Api {
     @POST("register")
     @FormUrlEncoded
     suspend fun signup(
-        @Field("email") email: String,
+        @Field("user_name") userName: String,
         @Field("name") name: String,
         @Field("password") password: String
     ): Response<BaseResponse<User>>
@@ -31,7 +31,7 @@ interface Api {
     @POST("register-admin")
     @FormUrlEncoded
     suspend fun signupAdmin(
-        @Field("email") email: String,
+        @Field("user_name") userName: String,
         @Field("name") name: String,
         @Field("password") password: String
     ): Response<BaseResponse<User>>
@@ -170,8 +170,9 @@ interface Api {
     @FormUrlEncoded
     suspend fun insertNewDevice(
         @Header("auth-token") token: String,
+        @Field("is_organization") isOrganization: Int,
         @Field("register_name") registerName: String,
-        @Field("register_national_id") registerNationalId: String,
+        @Field("register_id") registerNationalId: String,
         @Field("register_phone") registerPhone: String,
         @Field("device_plate") devicePlate: String,
         @Field("device_color") deviceColor: String,
@@ -270,4 +271,22 @@ interface Api {
     suspend fun countSummary(
         @Header("auth-token") token: String,
     ): Response<BaseResponse<CountSummary>>
+    
+    // get active devices
+    @GET("api/device/active")
+    suspend fun getActiveDevices(
+        @Header("auth-token") token: String,
+    ): Response<BaseResponse<List<Device2>>>
+    
+    // get all devices
+    @GET("api/device/all")
+    suspend fun getAllDevices(
+        @Header("auth-token") token: String,
+    ): Response<BaseResponse<List<Device2>>>
+    
+    // get all registers
+    @GET("api/register/all")
+    suspend fun getAllRegisters(
+        @Header("auth-token") token: String,
+    ): Response<BaseResponse<List<Register>>>
 }
