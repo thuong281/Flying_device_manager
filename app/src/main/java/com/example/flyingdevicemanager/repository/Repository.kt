@@ -206,4 +206,8 @@ class Repository {
     suspend fun getAllRegisters(token: String): Response<BaseResponse<List<Register>>> {
         return RetrofitInstance.api.getAllRegisters(token)
     }
+    
+    suspend fun changePassword(token: String, oldPassword: String, newPassword: String): Response<BaseResponse<Any>> {
+        return RetrofitInstance.api.changePassword(token, oldPassword, newPassword)
+    }
 }

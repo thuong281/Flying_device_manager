@@ -7,6 +7,7 @@ import androidx.fragment.app.*
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.*
 import com.example.flyingdevicemanager.R
+import com.example.flyingdevicemanager.app_ui.user_profile.change_password.ChangePasswordFragment
 import com.example.flyingdevicemanager.app_ui.user_profile.create_user.CreateUserFragment
 import com.example.flyingdevicemanager.app_ui.user_profile.dialog.AvatarFragment
 import com.example.flyingdevicemanager.app_ui.user_profile.user_kyc.UserKycFragment
@@ -104,8 +105,12 @@ class UserFragment : BaseFragment<FragmentUserBinding>(
             loadData()
         }
         
-        binding.userKyc.setOnClickListener {
-            showDialog(UserKycFragment())
+        binding.changePassword.setOnClickListener {
+            val dialog = ChangePasswordFragment()
+            dialog.updateSuccessCallback = {
+                binding.logout.performClick()
+            }
+            showDialog(dialog)
         }
         
         binding.createUserAccount.setOnClickListener {

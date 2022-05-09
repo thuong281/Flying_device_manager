@@ -289,4 +289,13 @@ interface Api {
     suspend fun getAllRegisters(
         @Header("auth-token") token: String,
     ): Response<BaseResponse<List<Register>>>
+    
+    // change password
+    @POST("api/user/change-password")
+    @FormUrlEncoded
+    suspend fun changePassword(
+        @Header("auth-token") token: String,
+        @Field("old_password") oldPassword: String,
+        @Field("new_password") newPassword: String,
+    ): Response<BaseResponse<Any>>
 }

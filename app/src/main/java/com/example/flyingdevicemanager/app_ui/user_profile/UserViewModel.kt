@@ -32,6 +32,8 @@ class UserViewModel : ViewModel() {
     
     val createUserResponse: MutableSharedFlow<Response<BaseResponse<User>>> = MutableSharedFlow()
     
+    val updatePasswordResponse: MutableSharedFlow<Response<BaseResponse<Any>>> = MutableSharedFlow()
+    
     val loading: MutableLiveData<Boolean> = MutableLiveData()
     
     val updateAvatarLoading: MutableLiveData<Boolean> = MutableLiveData()
@@ -111,6 +113,13 @@ class UserViewModel : ViewModel() {
         viewModelScope.launch {
             val response = repository.signUpAdmin(userName, fullName, password)
             createUserResponse.emit(response)
+        }
+    }
+    
+    fun updatePassword(token: String, oldPassword: String, newPassword: String) {
+        viewModelScope.launch {
+            val response = repository.changePassword(token, oldPassword, newPassword)
+                updatePasswordResponse.emit(response)
         }
     }
     

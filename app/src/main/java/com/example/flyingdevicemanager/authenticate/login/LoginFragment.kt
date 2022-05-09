@@ -79,9 +79,6 @@ class LoginFragment : Fragment() {
             val password = binding.passwordText.text.toString()
             viewModel.login(userName = userName, password = password)
         }
-        binding.register.setOnClickListener {
-            navController.navigate(R.id.action_loginFragment_to_signupFragment)
-        }
     }
     
     private fun storeToken(token: String) {

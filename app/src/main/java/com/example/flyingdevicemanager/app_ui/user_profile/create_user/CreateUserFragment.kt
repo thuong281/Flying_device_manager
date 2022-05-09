@@ -28,8 +28,8 @@ class CreateUserFragment : BaseDialogFragment<FragmentCreateUserBinding>(
         super.onStart()
         val dialog: Dialog? = dialog
         if (dialog != null) {
-            val width = (resources.displayMetrics.widthPixels * 0.90).toInt()
-            val height = (resources.displayMetrics.heightPixels * 0.75).toInt()
+            val width = (resources.displayMetrics.widthPixels * 1).toInt()
+            val height = (resources.displayMetrics.heightPixels * 0.72).toInt()
             dialog.window!!.setLayout(width, height)
         }
     }

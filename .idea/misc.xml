@@ -37,12 +37,13 @@
         <entry key="app/src/main/res/layout/device_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/device_item_2.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/fragment_active_device.xml" value="0.2526041666666667" />
-        <entry key="app/src/main/res/layout/fragment_add.xml" value="0.2526041666666667" />
+        <entry key="app/src/main/res/layout/fragment_add.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_add_device.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_add_device2.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/fragment_all_device.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/fragment_all_register.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/fragment_avatar.xml" value="0.2526041666666667" />
+        <entry key="app/src/main/res/layout/fragment_change_password.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_create_user.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_device.xml" value="0.2526041666666667" />
@@ -65,6 +66,7 @@
         <entry key="app/src/main/res/layout/fragment_user_kyc.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_user_kyc_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_user_request_follow.xml" value="0.14739583333333334" />
+        <entry key="app/src/main/res/layout/list_item.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/register_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/user_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/user_request_item.xml" value="0.33" />

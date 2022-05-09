@@ -32,21 +32,14 @@ class AddFragment : BaseFragment<FragmentAddBinding>(
     }
     
     private fun initSpinner() {
-        val spinnerAdapter = ArrayAdapter(context!!, R.layout.support_simple_spinner_dropdown_item, registerType)
-        spinnerAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
-        binding.spinner.adapter = spinnerAdapter
-        
-        binding.spinner.onItemSelectedListener = object :AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                if (p0?.id == R.id.spinner) {
-                    isOrganization = p2
-                    changeRegisterType(isOrganization)
-                }
+        val adapterSpinner = ArrayAdapter(context!!, R.layout.list_item, registerType)
+        (binding.menu.editText as AutoCompleteTextView).setAdapter(adapterSpinner)
+        (binding.menu.editText as AutoCompleteTextView).onItemClickListener =
+            AdapterView.OnItemClickListener { p0, p1, p2, p3 ->
+                isOrganization = p2
+                changeRegisterType(isOrganization)
             }
-    
-            override fun onNothingSelected(p0: AdapterView<*>?) {}
-    
-        }
+        (binding.menu.editText as AutoCompleteTextView).setText(registerType[0], false)
     }
     
     fun changeRegisterType(isOrganization: Int) {

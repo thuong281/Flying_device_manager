@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <androidx.core.widget.NestedScrollView
@@ -18,38 +18,58 @@
             android:padding="12dp"
             tools:context=".app_ui.add_device.add.AddFragment">
 
-            <TextView
-                android:layout_marginBottom="4dp"
-                android:id="@+id/register_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="2dp"
-                android:text="Select register type"
-                android:textColor="@color/boldGray"
-                android:textSize="18sp" />
-
-            <LinearLayout
-                android:background="@drawable/border_black"
-                android:padding="1dp"
-                android:layout_below="@+id/register_type"
-                android:id="@+id/spinner_container"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/menu"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:hint="Register type">
 
-                <Spinner
-                    android:id="@+id/spinner"
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:focusable="false"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#DCD9D9" />
-            </LinearLayout>
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+<!--            <TextView-->
+<!--                android:id="@+id/register_type"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/menu"-->
+
+<!--                android:layout_marginStart="2dp"-->
+<!--                android:layout_marginBottom="4dp"-->
+<!--                android:text="Select register type"-->
+<!--                android:textColor="@color/boldGray"-->
+<!--                android:textSize="18sp" />-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/spinner_container"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/register_type"-->
+<!--                android:background="@drawable/border_black"-->
+<!--                android:padding="1dp">-->
+
+<!--                <Spinner-->
+<!--                    android:id="@+id/spinner"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="#DCD9D9" />-->
+<!--            </LinearLayout>-->
 
             <com.google.android.material.textfield.TextInputLayout
+                android:layout_marginTop="8dp"
                 android:id="@+id/register_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/spinner_container"
-                android:hint="Register name">
+                android:layout_below="@+id/menu"
+                android:hint="Register name"
+                app:boxStrokeColor="@color/black"
+                app:hintTextColor="@color/black"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/register_name_text"
@@ -59,10 +79,14 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/register_national_id"
+                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/register_name"
-                android:hint="Register id number">
+                android:hint="Register id number"
+                app:boxStrokeColor="@color/black"
+                app:hintTextColor="@color/black"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/register_national_id_text"
@@ -72,10 +96,14 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/register_phone"
+                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/register_national_id"
-                android:hint="Register phone number">
+                android:hint="Register phone number"
+                app:boxStrokeColor="@color/black"
+                app:hintTextColor="@color/black"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/register_phone_text"
@@ -88,7 +116,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/register_phone"
-                android:hint="Device Plate">
+                android:hint="Device Plate"
+                android:layout_marginTop="8dp"
+                app:boxStrokeColor="@color/black"
+                app:hintTextColor="@color/black"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/device_plate_text"
@@ -101,7 +133,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/device_plate"
-                android:hint="Device color">
+                android:hint="Device color"
+                android:layout_marginTop="8dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/device_color_text"
@@ -114,7 +148,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/device_color"
-                android:hint="Device manufacturer">
+                android:hint="Device manufacturer"
+                app:boxStrokeColor="@color/black"
+                app:hintTextColor="@color/black"
+                android:layout_marginTop="8dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/device_manufacturer_text"
@@ -138,11 +176,11 @@
 
             <RelativeLayout
                 android:id="@+id/date_picker"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/border_black"
-                android:layout_below="@id/device_manufacturer"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_below="@id/device_manufacturer"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/border_black">
 
                 <ImageView
                     android:id="@+id/icon"
@@ -163,22 +201,22 @@
 
             </RelativeLayout>
 
-<!--            <com.google.android.material.button.MaterialButton-->
-<!--                android:background="@color/primaryColor"-->
-<!--                android:layout_below="@+id/date_picker"-->
-<!--                android:id="@+id/submit_add"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="24dp"-->
-<!--                android:text="Add device" />-->
+            <!--            <com.google.android.material.button.MaterialButton-->
+            <!--                android:background="@color/primaryColor"-->
+            <!--                android:layout_below="@+id/date_picker"-->
+            <!--                android:id="@+id/submit_add"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="24dp"-->
+            <!--                android:text="Add device" />-->
 
             <com.google.android.material.button.MaterialButton
-                android:layout_marginTop="24dp"
-                android:layout_below="@+id/date_picker"
-                android:layout_marginBottom="8dp"
                 android:id="@+id/submit_add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/date_picker"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/bg_white_round_radius_10dp"
                 android:elevation="4dp"
                 android:text="Add device"

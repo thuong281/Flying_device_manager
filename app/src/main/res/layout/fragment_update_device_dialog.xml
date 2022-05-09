@@ -128,13 +128,32 @@
                     android:layout_height="match_parent" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/device_buy_date"
+            <RelativeLayout
+                android:id="@+id/date_picker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/device_manufacturer"
-                android:padding="8dp"
-                android:text="Select device buy date" />
+                android:layout_marginTop="12dp"
+                android:background="@drawable/border_black">
+
+                <ImageView
+                    android:id="@+id/icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginHorizontal="6dp"
+                    android:src="@drawable/ic_baseline_calendar_month_24" />
+
+                <TextView
+                    android:id="@+id/device_buy_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/icon"
+                    android:padding="8dp"
+                    android:text="Select device buy date"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
 
         </LinearLayout>
 
