@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.*
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.*
 import com.example.flyingdevicemanager.R
 import com.example.flyingdevicemanager.app_ui.dashboard.DashBoardViewModel
 import com.example.flyingdevicemanager.app_ui.search_device.*
@@ -24,6 +25,8 @@ class AllRegisterFragment : BaseDialogFragment<FragmentAllRegisterBinding>(
     
     private val viewModel: DashBoardViewModel by activityViewModels()
     
+    var callback: (() -> Unit)? = null
+    
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         handleAction()
@@ -34,6 +37,12 @@ class AllRegisterFragment : BaseDialogFragment<FragmentAllRegisterBinding>(
     
     private fun initRv() {
         binding.rv.adapter = adapter
+        binding.rv.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                LinearLayoutManager.VERTICAL
+            )
+        )
     }
     
     private fun loadData() {
@@ -59,6 +68,7 @@ class AllRegisterFragment : BaseDialogFragment<FragmentAllRegisterBinding>(
     
     private fun handleAction() {
         binding.btnBack.setOnClickListener {
+            callback?.invoke()
             dismiss()
         }
         binding.freshLayout.setOnRefreshListener {

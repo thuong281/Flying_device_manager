@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.*
 import com.example.flyingdevicemanager.R
 import com.example.flyingdevicemanager.app_ui.search_device.*
 import com.example.flyingdevicemanager.app_ui.search_device.dialog.device.*
@@ -39,6 +40,12 @@ class RegisterDetailDialogFragment(private val registerId: String, private val i
     
     private fun initRv() {
         binding.rv.adapter = adapter
+        binding.rv.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                LinearLayoutManager.VERTICAL
+            )
+        )
     }
     
     private fun observeData() {

@@ -96,14 +96,14 @@ class UserFragment : BaseFragment<FragmentUserBinding>(
         if (user.avatar != null && user.avatar != "") {
             Picasso.get().load(user.avatar).fit().centerCrop().into(binding.avatar)
         }
-        binding.userEmail.text = user.userName
+//        binding.userEmail.text = user.userName
         binding.userName.text = user.name
     }
     
     private fun handleAction() {
-        binding.btnRefresh.setOnClickListener {
-            loadData()
-        }
+//        binding.btnRefresh.setOnClickListener {
+//            loadData()
+//        }
         
         binding.changePassword.setOnClickListener {
             val dialog = ChangePasswordFragment()

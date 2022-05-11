@@ -40,17 +40,17 @@
                     android:textColor="@color/white"
                     android:textSize="20sp" />
 
-                <ImageView
-                    android:id="@+id/btn_refresh"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="7dp"
-                    android:background="@color/colorPrimary"
-                    android:padding="7dp"
-                    android:src="@drawable/ic_baseline_refresh_24"
-                    app:tint="@color/white" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/btn_refresh"-->
+<!--                    android:layout_width="40dp"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_marginEnd="7dp"-->
+<!--                    android:background="@color/colorPrimary"-->
+<!--                    android:padding="7dp"-->
+<!--                    android:src="@drawable/ic_baseline_refresh_24"-->
+<!--                    app:tint="@color/white" />-->
 
             </RelativeLayout>
 
@@ -76,32 +76,21 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/user_email"
-            style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/image_container"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="8dp"
-            tools:text="pepeSucCac@gmail.com"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <TextView
             android:id="@+id/user_name"
             style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/user_email"
+            android:layout_below="@id/image_container"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="8dp"
-            tools:text="id: 1231244"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            tools:text="id: 1231244"
+            android:layout_marginBottom="30dp"/>
 
         <TextView
             android:id="@+id/change_password"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/user_name"
             android:layout_marginStart="12dp"
@@ -110,10 +99,14 @@
             android:layout_marginBottom="12dp"
             android:background="#fff"
             android:clickable="true"
+            android:drawablePadding="12dp"
             android:elevation="4dp"
+            android:gravity="center_vertical"
             android:padding="20dp"
             android:text="Change password"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            app:drawableStartCompat="@drawable/ic_baseline_lock_open_24"
+            app:drawableTint="@color/black" />
 
         <TextView
             android:id="@+id/create_user_account"
@@ -127,9 +120,13 @@
             android:background="#fff"
             android:clickable="true"
             android:elevation="4dp"
+            android:gravity="center_vertical"
             android:padding="20dp"
             android:text="Create user account"
-            android:textColor="@color/black" />
+            android:drawablePadding="12dp"
+            android:textColor="@color/black"
+            app:drawableStartCompat="@drawable/ic_baseline_person_add_24"
+            app:drawableTint="@color/black" />
 
         <TextView
             android:id="@+id/logout"
@@ -145,7 +142,10 @@
             android:elevation="4dp"
             android:padding="20dp"
             android:text="Log out"
-            android:textColor="@color/black" />
+            android:drawablePadding="12dp"
+            android:textColor="@color/red"
+            app:drawableStartCompat="@drawable/ic_baseline_exit_to_app_24"
+            app:drawableTint="@color/red" />
 
     </RelativeLayout>
 

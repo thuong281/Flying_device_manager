@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.*
 import com.example.flyingdevicemanager.R
 import com.example.flyingdevicemanager.app_ui.search_device.dialog.device.DeviceDetailDialogFragment
 import com.example.flyingdevicemanager.app_ui.search_device.dialog.register.RegisterDetailDialogFragment
@@ -74,6 +75,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(
     
     private fun initRv() {
         binding.rv.adapter = adapter
+        binding.rv.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                LinearLayoutManager.VERTICAL
+            )
+        )
     }
     
     private fun handleAction() {

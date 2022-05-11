@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="12dp">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -20,6 +21,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/menu"
+                android:layout_marginBottom="@dimen/margin_bottom_form"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,6 +64,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="@dimen/margin_bottom_form"
                 android:id="@+id/register_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -86,6 +89,7 @@
                 android:hint="Register id number"
                 app:boxStrokeColor="@color/black"
                 app:hintTextColor="@color/black"
+                android:layout_marginBottom="@dimen/margin_bottom_form"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -103,6 +107,7 @@
                 android:hint="Register phone number"
                 app:boxStrokeColor="@color/black"
                 app:hintTextColor="@color/black"
+                android:layout_marginBottom="@dimen/margin_bottom_form"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -120,6 +125,7 @@
                 android:layout_marginTop="8dp"
                 app:boxStrokeColor="@color/black"
                 app:hintTextColor="@color/black"
+                android:layout_marginBottom="@dimen/margin_bottom_form"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -135,6 +141,7 @@
                 android:layout_below="@id/device_plate"
                 android:hint="Device color"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="@dimen/margin_bottom_form"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -152,6 +159,7 @@
                 app:boxStrokeColor="@color/black"
                 app:hintTextColor="@color/black"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="@dimen/margin_bottom_form"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -215,16 +223,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/date_picker"
+                android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="8dp"
-                android:background="@drawable/bg_white_round_radius_10dp"
                 android:elevation="4dp"
+                android:paddingVertical="12dp"
                 android:text="Add device"
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                app:backgroundTint="@color/primaryColor" />
+                app:backgroundTint="@color/primaryColor"
+                app:cornerRadius="24dp" />
 
             <ProgressBar
                 android:id="@+id/loading"

@@ -4,16 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipe_layout"
     app:dragEdge="right"
-    app:mode="same_level">
+    app:mode="same_level"
+    android:padding="8dp">
 
     <LinearLayout
         android:id="@+id/delete"
         android:background="@color/red"
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
-        
+
         <TextView
             android:textStyle="bold"
             android:gravity="center"
@@ -32,16 +34,18 @@
         android:layout_marginTop="8dp">
 
         <ImageView
+            android:layout_centerVertical="true"
             android:id="@+id/image"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/ic_airplane_flight" />
+            android:src="@drawable/drone" />
 
         <LinearLayout
+            android:layout_centerVertical="true"
             android:id="@+id/info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="12dp"
             android:layout_toEndOf="@id/image"
             android:orientation="vertical">
 
@@ -50,7 +54,7 @@
                 style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="may bay 123"
+                tools:text="may bay 123"
                 android:textColor="@color/black" />
 
             <TextView
@@ -58,7 +62,7 @@
                 style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="id: 1231244"
+                tools:text="id: 1231244"
                 android:textColor="@color/black" />
 
         </LinearLayout>

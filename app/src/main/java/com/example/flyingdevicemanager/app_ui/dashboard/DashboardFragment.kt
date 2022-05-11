@@ -75,7 +75,11 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>(
             if (data!!.activeDevices == 0) {
                 Toast.makeText(context, "There is no active device", Toast.LENGTH_SHORT).show()
             } else {
-                showDialog(ActiveDeviceFragment())
+                showDialog(ActiveDeviceFragment().apply {
+                    callback = {
+                        loadData()
+                    }
+                })
             }
         }
     
@@ -84,7 +88,11 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>(
             if (data!!.devices == 0) {
                 Toast.makeText(context, "There is no device", Toast.LENGTH_SHORT).show()
             } else {
-                showDialog(AllDeviceFragment())
+                showDialog(AllDeviceFragment().apply {
+                    callback = {
+                        loadData()
+                    }
+                })
             }
         }
     
@@ -93,7 +101,11 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>(
             if (data!!.registers == 0) {
                 Toast.makeText(context, "There is no register", Toast.LENGTH_SHORT).show()
             } else {
-                showDialog(AllRegisterFragment())
+                showDialog(AllRegisterFragment().apply {
+                    callback = {
+                        loadData()
+                    }
+                })
             }
         }
     }

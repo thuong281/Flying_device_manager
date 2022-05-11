@@ -109,20 +109,21 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="250dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/oval_bg">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/device"
+
             android:layout_width="120dp"
             android:layout_height="120dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/round_background"
             app:cardCornerRadius="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/register"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:strokeColor="@color/grayLine"
             app:strokeWidth="2dp">
 
@@ -161,12 +162,12 @@
             android:id="@+id/register"
             android:layout_width="120dp"
             android:layout_height="120dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/round_background"
             app:cardCornerRadius="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/device"
-            app:layout_constraintTop_toTopOf="parent"
             app:strokeColor="@color/grayLine"
             app:strokeWidth="2dp">
 

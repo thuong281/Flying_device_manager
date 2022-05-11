@@ -58,7 +58,10 @@ class ChangePasswordFragment : BaseDialogFragment<FragmentChangePasswordBinding>
     
     private fun handleAction() {
         binding.changePassword.setOnClickListener {
-            if (binding.newPassword.error != null || binding.repeatNewPassword.error != null || binding.repeatNewPasswordText.text.isNullOrEmpty()) return@setOnClickListener
+            if (binding.newPassword.error != null || binding.repeatNewPassword.error != null || binding.repeatNewPasswordText.text.isNullOrEmpty()) {
+                Toast.makeText(context, "Please fill all the field correctly!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             viewModel.updatePassword(
                 getToken().toString(),
                 binding.oldPasswordText.text.toString(),
