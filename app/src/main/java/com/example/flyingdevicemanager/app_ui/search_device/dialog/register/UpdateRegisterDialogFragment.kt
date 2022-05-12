@@ -92,6 +92,13 @@ class UpdateRegisterDialogFragment(private val previousRegister: Register) : Bas
     
     private fun bindData() {
         binding.nameText.setText(previousRegister.name)
+        if (previousRegister.isOrganization == 1) {
+            binding.name.hint = "Organization name"
+            binding.citizenCard.hint = "Organization ID"
+        } else {
+            binding.name.hint = "Register name"
+            binding.citizenCard.hint = "Citizen ID"
+        }
         binding.citizenCardText.setText(previousRegister.registerId)
         binding.phoneNumberText.setText(previousRegister.phoneNumber)
     }

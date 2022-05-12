@@ -93,7 +93,7 @@ class RegisterDetailDialogFragment(private val registerId: String, private val i
                     200 -> {
                         Toast.makeText(context, "Delete successfully", Toast.LENGTH_SHORT).show()
                         dismiss()
-                        closeCallBack?.invoke()
+                        closeCallBack.invoke()
                     }
                     else -> errorMessage(it)
                 }
@@ -109,7 +109,7 @@ class RegisterDetailDialogFragment(private val registerId: String, private val i
             binding.nameIcon.setImageResource(R.drawable.ic_baseline_home_work_24)
         } else {
             binding.nameTitle.text = "Register name: "
-            binding.idTitle.text = "Citizen card: "
+            binding.idTitle.text = "Citizen ID: "
             binding.nameIcon.setImageResource(R.drawable.ic_baseline_person_24)
         }
         binding.registerName.text = data.name
@@ -124,7 +124,7 @@ class RegisterDetailDialogFragment(private val registerId: String, private val i
     
     private fun handleAction() {
         binding.btnBack.setOnClickListener {
-            closeCallBack!!.invoke()
+            closeCallBack.invoke()
             dismiss()
         }
         

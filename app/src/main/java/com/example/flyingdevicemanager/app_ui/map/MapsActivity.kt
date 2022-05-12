@@ -80,6 +80,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         binding.btnBack.setOnClickListener {
             super.onBackPressed()
         }
+        binding.currentLocation.setOnClickListener {
+            val cameraUpdate = CameraUpdateFactory.newLatLngZoom(previousLatLng, 16.0F);
+            mMap.animateCamera(cameraUpdate)
+        }
     }
     
     private fun initSocket() {

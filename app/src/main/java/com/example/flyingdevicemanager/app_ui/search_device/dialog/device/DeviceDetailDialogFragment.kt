@@ -140,6 +140,9 @@ class DeviceDetailDialogFragment(
         binding.update.setOnClickListener {
             if (currentDevice == null) return@setOnClickListener
             val dialog = UpdateDeviceDialogFragment(currentDevice!!)
+            dialog.updateSuccessCallback = {
+                loadData()
+            }
             showDialog(dialog)
         }
         

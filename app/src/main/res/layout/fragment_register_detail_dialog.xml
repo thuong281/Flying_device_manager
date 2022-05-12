@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:maxLines="2"
-                android:text="Register name"
+                android:text="Register detail"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 

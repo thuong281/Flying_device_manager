@@ -42,7 +42,7 @@ class AddFragment : BaseFragment<FragmentAddBinding>(
         (binding.menu.editText as AutoCompleteTextView).setText(registerType[0], false)
     }
     
-    fun changeRegisterType(isOrganization: Int) {
+    private fun changeRegisterType(isOrganization: Int) {
         if (isOrganization == 1) {
             binding.registerName.hint = "Organization name"
             binding.registerNationalId.hint = "Organization id"

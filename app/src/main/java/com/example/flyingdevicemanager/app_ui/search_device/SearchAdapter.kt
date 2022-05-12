@@ -14,9 +14,10 @@ class SearchAdapter(private val listener: ClickListener) :
         RecyclerView.ViewHolder(binding.root) {
         val item = binding.item
         
+        @SuppressLint("SetTextI18n")
         fun bind(device: Device2) {
-            binding.name.text = device.devicePlate
-            binding.deviceId.text = device.id
+            binding.name.text = "Device Plate: ${device.devicePlate}"
+            binding.deviceId.text = "ID: ${device.id}"
             if (device.isActive == true) {
                 binding.activeStatus.setImageResource(R.drawable.ic_online)
             } else {
@@ -32,12 +33,13 @@ class SearchAdapter(private val listener: ClickListener) :
         @SuppressLint("SetTextI18n")
         fun bind(register: Register) {
             binding.registerName.text = "${register.name}  - ${register.listDeviceId?.size} device"
-            binding.registerNationalId.text = "Organization ID: ${register.registerId}"
             binding.registerPhoneNumber.text = "Phone number: ${register.phoneNumber}"
             if (register.isOrganization == 0) {
                 binding.avatar.setImageResource(R.drawable.ic_baseline_person_24)
+                binding.registerNationalId.text = "Citizen ID: ${register.registerId}"
             } else {
                 binding.avatar.setImageResource(R.drawable.ic_baseline_home_work_24)
+                binding.registerNationalId.text = "Organization ID: ${register.registerId}"
                 binding.imageContainer.radius = 0f
             }
         }
